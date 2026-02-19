@@ -1,0 +1,50 @@
+npm install \
+   nativewind tailwindcss \
+   @gluestack-ui/themed \
+   react-native-svg react-native-svg-transformer \
+   react-native-linear-gradient \
+   @react-native-community/blur \
+   lottie-react-native \
+   @react-navigation/native @react-navigation/native-stack @react-navigation/bottom-tabs \
+   react-native-screens \
+   react-native-reanimated \
+   react-native-gesture-handler \
+   @reduxjs/toolkit react-redux \
+   react-native-keychain \
+   react-native-biometrics \
+   @react-native-firebase/app @react-native-firebase/messaging \
+   @notifee/react-native \
+   react-native-vision-camera \
+   vision-camera-code-scanner \
+   react-native-image-picker \
+   react-native-qrcode-svg \
+   @stripe/stripe-react-native \
+   react-native-plaid-link-sdk \
+   @react-native-async-storage/async-storage \
+   @react-native-community/netinfo \
+   react-native-device-info \
+   react-native-permissions \
+   react-native-config \
+   react-native-splash-screen \
+   react-native-haptic-feedback \
+   @react-native-clipboard/clipboard \
+   @gorhom/bottom-sheet \
+   zod axios date-fns uuid \
+   victory-native
+
+    npm install --save-dev \
+   babel-plugin-module-resolver
+
+
+    npm install \
+   express @prisma/client zod jsonwebtoken \
+   express-rate-limit pino cors helmet
+
+ npm install --save-dev \
+   prisma ts-node-dev typescript \
+   @types/express @types/node @types/jsonwebtoken
+
+ After installing native deps (iOS)
+
+ bundle exec pod install --project-directory=ios
+ 

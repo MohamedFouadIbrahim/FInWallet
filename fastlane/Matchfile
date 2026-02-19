@@ -1,0 +1,5 @@
+git_url("https://github.com/your-org/certificates")
+storage_mode("git")
+type("development")
+app_identifier(["com.finwallet.app"])
+username("your@email.com")
