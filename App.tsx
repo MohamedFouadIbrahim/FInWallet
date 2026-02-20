@@ -1,44 +1,14 @@
-import { StatusBar, StyleSheet, Text, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-} from 'react-native-safe-area-context';
-import "./global.css"
- 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-// const safeAreaInsets = useSafeAreaInsets();
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { NavigationContainer } from '@react-navigation/native';
+import OnboardingNavigator from '@features/onboarding/navigation/OnboardingNavigator';
+import './global.css';
+
+export default function App() {
   return (
     <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <AppContent />
+      <NavigationContainer>
+        <OnboardingNavigator />
+      </NavigationContainer>
     </SafeAreaProvider>
   );
 }
-
-function AppContent() {
-
-  return (
-    <View style={styles.container}>
-      <Text className='font-jakarta-semibold' >
-        heedok
-      </Text>
-
-      <Text  >
-        heedok
-      </Text>
-
-      <Text>
-        heedok
-      </Text>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding:10
-  },
-});
-
-export default App;
