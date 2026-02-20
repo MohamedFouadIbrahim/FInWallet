@@ -1,0 +1,885 @@
+{
+  "name": "FinWallet Design System",
+  "version": "1.0.0",
+  "description": "Complete design system for FinWallet - Digital Banking & Wallet React Native App Template",
+  "lastUpdated": "2026-02-17",
+
+  "colors": {
+    "brand": {
+      "primary": {
+        "50": "#E8F0FE",
+        "100": "#C5D9FC",
+        "200": "#90B4F9",
+        "300": "#5B8EF6",
+        "400": "#2D6FF3",
+        "500": "#1A6FEF",
+        "600": "#1559C7",
+        "700": "#10449E",
+        "800": "#0A2F76",
+        "900": "#0A1E3D",
+        "950": "#061328"
+      },
+      "secondary": {
+        "50": "#E6F9FC",
+        "100": "#B3EEF6",
+        "200": "#80E3F0",
+        "300": "#4DD8EA",
+        "400": "#26CFE4",
+        "500": "#00B4D8",
+        "600": "#0095B3",
+        "700": "#00768E",
+        "800": "#005769",
+        "900": "#003844"
+      },
+      "accent": {
+        "gold": "#FFB800",
+        "goldLight": "#FFF3CC",
+        "goldDark": "#CC9300"
+      }
+    },
+
+    "semantic": {
+      "success": {
+        "50": "#ECFDF5",
+        "100": "#D1FAE5",
+        "200": "#A7F3D0",
+        "300": "#6EE7B7",
+        "400": "#34D399",
+        "500": "#22C55E",
+        "600": "#16A34A",
+        "700": "#15803D",
+        "800": "#166534",
+        "900": "#14532D"
+      },
+      "error": {
+        "50": "#FEF2F2",
+        "100": "#FEE2E2",
+        "200": "#FECACA",
+        "300": "#FCA5A5",
+        "400": "#F87171",
+        "500": "#EF4444",
+        "600": "#DC2626",
+        "700": "#B91C1C",
+        "800": "#991B1B",
+        "900": "#7F1D1D"
+      },
+      "warning": {
+        "50": "#FFFBEB",
+        "100": "#FEF3C7",
+        "200": "#FDE68A",
+        "300": "#FCD34D",
+        "400": "#FBBF24",
+        "500": "#F59E0B",
+        "600": "#D97706",
+        "700": "#B45309",
+        "800": "#92400E",
+        "900": "#78350F"
+      },
+      "info": {
+        "50": "#EFF6FF",
+        "100": "#DBEAFE",
+        "200": "#BFDBFE",
+        "300": "#93C5FD",
+        "400": "#60A5FA",
+        "500": "#3B82F6",
+        "600": "#2563EB",
+        "700": "#1D4ED8",
+        "800": "#1E40AF",
+        "900": "#1E3A8A"
+      }
+    },
+
+    "neutral": {
+      "0": "#FFFFFF",
+      "25": "#FCFCFD",
+      "50": "#F8FAFC",
+      "100": "#F1F5F9",
+      "200": "#E2E8F0",
+      "300": "#CBD5E1",
+      "400": "#94A3B8",
+      "500": "#64748B",
+      "600": "#475569",
+      "700": "#334155",
+      "800": "#1E293B",
+      "900": "#0F172A",
+      "950": "#020617"
+    },
+
+    "theme": {
+      "light": {
+        "background": {
+          "primary": "#F8FAFC",
+          "secondary": "#F1F5F9",
+          "tertiary": "#E2E8F0",
+          "card": "#FFFFFF",
+          "elevated": "#FFFFFF",
+          "input": "#F1F5F9",
+          "overlay": "rgba(15, 23, 42, 0.5)",
+          "skeleton": "#E2E8F0"
+        },
+        "text": {
+          "primary": "#0F172A",
+          "secondary": "#64748B",
+          "tertiary": "#94A3B8",
+          "disabled": "#CBD5E1",
+          "inverse": "#FFFFFF",
+          "link": "#1A6FEF",
+          "success": "#16A34A",
+          "error": "#DC2626",
+          "warning": "#D97706"
+        },
+        "border": {
+          "default": "#E2E8F0",
+          "light": "#F1F5F9",
+          "strong": "#CBD5E1",
+          "focus": "#1A6FEF",
+          "error": "#EF4444",
+          "success": "#22C55E"
+        },
+        "icon": {
+          "primary": "#475569",
+          "secondary": "#94A3B8",
+          "disabled": "#CBD5E1",
+          "inverse": "#FFFFFF",
+          "brand": "#1A6FEF"
+        },
+        "surface": {
+          "header": "#0A1E3D",
+          "headerText": "#FFFFFF",
+          "tabBar": "#FFFFFF",
+          "tabBarBorder": "#E2E8F0",
+          "tabActive": "#1A6FEF",
+          "tabInactive": "#94A3B8",
+          "badge": "#EF4444",
+          "badgeText": "#FFFFFF"
+        },
+        "button": {
+          "primaryBg": "#1A6FEF",
+          "primaryText": "#FFFFFF",
+          "primaryPressed": "#1559C7",
+          "secondaryBg": "#E8F0FE",
+          "secondaryText": "#1A6FEF",
+          "secondaryPressed": "#C5D9FC",
+          "outlineBorder": "#1A6FEF",
+          "outlineText": "#1A6FEF",
+          "outlinePressed": "#E8F0FE",
+          "ghostText": "#1A6FEF",
+          "ghostPressed": "#E8F0FE",
+          "destructiveBg": "#EF4444",
+          "destructiveText": "#FFFFFF",
+          "destructivePressed": "#DC2626",
+          "disabledBg": "#E2E8F0",
+          "disabledText": "#94A3B8"
+        },
+        "card": {
+          "balanceGradientStart": "#1A6FEF",
+          "balanceGradientMiddle": "#0A4DBF",
+          "balanceGradientEnd": "#083B96",
+          "balanceText": "#FFFFFF",
+          "balanceSubtext": "rgba(255, 255, 255, 0.7)",
+          "balanceAccent": "rgba(255, 255, 255, 0.08)",
+          "promoBg": "#0A1E3D",
+          "promoText": "#FFFFFF",
+          "promoAccent": "#FFB800"
+        },
+        "transaction": {
+          "income": "#22C55E",
+          "incomeBg": "rgba(34, 197, 94, 0.08)",
+          "expense": "#0F172A",
+          "expenseBg": "rgba(15, 23, 42, 0.05)",
+          "pending": "#F59E0B",
+          "pendingBg": "rgba(245, 158, 11, 0.08)",
+          "failed": "#EF4444",
+          "failedBg": "rgba(239, 68, 68, 0.08)"
+        },
+        "chart": {
+          "income": "#22C55E",
+          "expense": "#EF4444",
+          "savings": "#1A6FEF",
+          "category1": "#1A6FEF",
+          "category2": "#00B4D8",
+          "category3": "#F59E0B",
+          "category4": "#EF4444",
+          "category5": "#8B5CF6",
+          "category6": "#EC4899",
+          "gridLine": "#E2E8F0",
+          "label": "#94A3B8"
+        }
+      },
+
+      "dark": {
+        "background": {
+          "primary": "#0F172A",
+          "secondary": "#1E293B",
+          "tertiary": "#334155",
+          "card": "#1E293B",
+          "elevated": "#253449",
+          "input": "#334155",
+          "overlay": "rgba(0, 0, 0, 0.7)",
+          "skeleton": "#334155"
+        },
+        "text": {
+          "primary": "#F1F5F9",
+          "secondary": "#94A3B8",
+          "tertiary": "#64748B",
+          "disabled": "#475569",
+          "inverse": "#0F172A",
+          "link": "#60A5FA",
+          "success": "#4ADE80",
+          "error": "#F87171",
+          "warning": "#FBBF24"
+        },
+        "border": {
+          "default": "#334155",
+          "light": "#1E293B",
+          "strong": "#475569",
+          "focus": "#60A5FA",
+          "error": "#F87171",
+          "success": "#4ADE80"
+        },
+        "icon": {
+          "primary": "#CBD5E1",
+          "secondary": "#64748B",
+          "disabled": "#475569",
+          "inverse": "#0F172A",
+          "brand": "#60A5FA"
+        },
+        "surface": {
+          "header": "#0F172A",
+          "headerText": "#F1F5F9",
+          "tabBar": "#1E293B",
+          "tabBarBorder": "#334155",
+          "tabActive": "#60A5FA",
+          "tabInactive": "#64748B",
+          "badge": "#EF4444",
+          "badgeText": "#FFFFFF"
+        },
+        "button": {
+          "primaryBg": "#2D6FF3",
+          "primaryText": "#FFFFFF",
+          "primaryPressed": "#1A6FEF",
+          "secondaryBg": "#1E3A5F",
+          "secondaryText": "#60A5FA",
+          "secondaryPressed": "#253F6A",
+          "outlineBorder": "#60A5FA",
+          "outlineText": "#60A5FA",
+          "outlinePressed": "#1E3A5F",
+          "ghostText": "#60A5FA",
+          "ghostPressed": "#1E3A5F",
+          "destructiveBg": "#DC2626",
+          "destructiveText": "#FFFFFF",
+          "destructivePressed": "#B91C1C",
+          "disabledBg": "#334155",
+          "disabledText": "#64748B"
+        },
+        "card": {
+          "balanceGradientStart": "#1E3A6E",
+          "balanceGradientMiddle": "#162D56",
+          "balanceGradientEnd": "#0F2240",
+          "balanceText": "#F1F5F9",
+          "balanceSubtext": "rgba(241, 245, 249, 0.6)",
+          "balanceAccent": "rgba(255, 255, 255, 0.06)",
+          "promoBg": "#162033",
+          "promoText": "#F1F5F9",
+          "promoAccent": "#FBBF24"
+        },
+        "transaction": {
+          "income": "#4ADE80",
+          "incomeBg": "rgba(74, 222, 128, 0.1)",
+          "expense": "#F1F5F9",
+          "expenseBg": "rgba(241, 245, 249, 0.05)",
+          "pending": "#FBBF24",
+          "pendingBg": "rgba(251, 191, 36, 0.1)",
+          "failed": "#F87171",
+          "failedBg": "rgba(248, 113, 113, 0.1)"
+        },
+        "chart": {
+          "income": "#4ADE80",
+          "expense": "#F87171",
+          "savings": "#60A5FA",
+          "category1": "#60A5FA",
+          "category2": "#22D3EE",
+          "category3": "#FBBF24",
+          "category4": "#F87171",
+          "category5": "#A78BFA",
+          "category6": "#F472B6",
+          "gridLine": "#334155",
+          "label": "#64748B"
+        }
+      }
+    },
+
+    "quickAction": {
+      "send": { "bg": "rgba(26, 111, 239, 0.08)", "icon": "#1A6FEF" },
+      "receive": { "bg": "rgba(0, 180, 216, 0.08)", "icon": "#00B4D8" },
+      "topUp": { "bg": "rgba(34, 197, 94, 0.08)", "icon": "#22C55E" },
+      "payBills": { "bg": "rgba(245, 158, 11, 0.08)", "icon": "#F59E0B" },
+      "scanQR": { "bg": "rgba(139, 92, 246, 0.08)", "icon": "#8B5CF6" },
+      "more": { "bg": "rgba(100, 116, 139, 0.08)", "icon": "#64748B" }
+    },
+
+    "categoryIcons": {
+      "food": { "bg": "rgba(239, 68, 68, 0.08)", "icon": "#EF4444" },
+      "transport": { "bg": "rgba(26, 111, 239, 0.08)", "icon": "#1A6FEF" },
+      "shopping": { "bg": "rgba(245, 158, 11, 0.08)", "icon": "#F59E0B" },
+      "entertainment": { "bg": "rgba(139, 92, 246, 0.08)", "icon": "#8B5CF6" },
+      "utilities": { "bg": "rgba(0, 180, 216, 0.08)", "icon": "#00B4D8" },
+      "health": { "bg": "rgba(34, 197, 94, 0.08)", "icon": "#22C55E" },
+      "education": { "bg": "rgba(99, 102, 241, 0.08)", "icon": "#6366F1" },
+      "travel": { "bg": "rgba(236, 72, 153, 0.08)", "icon": "#EC4899" },
+      "income": { "bg": "rgba(34, 197, 94, 0.08)", "icon": "#22C55E" },
+      "transfer": { "bg": "rgba(26, 111, 239, 0.08)", "icon": "#1A6FEF" }
+    }
+  },
+
+  "typography": {
+    "fonts": {
+      "heading": {
+        "family": "PlusJakartaSans",
+        "weights": {
+          "bold": "PlusJakartaSans-Bold",
+          "semiBold": "PlusJakartaSans-SemiBold",
+          "medium": "PlusJakartaSans-Medium"
+        },
+        "source": "https://fonts.google.com/specimen/Plus+Jakarta+Sans",
+        "license": "SIL Open Font License"
+      },
+      "body": {
+        "family": "Inter",
+        "weights": {
+          "regular": "Inter-Regular",
+          "medium": "Inter-Medium",
+          "semiBold": "Inter-SemiBold",
+          "bold": "Inter-Bold"
+        },
+        "source": "https://fonts.google.com/specimen/Inter",
+        "license": "SIL Open Font License"
+      },
+      "mono": {
+        "family": "JetBrainsMono",
+        "weights": {
+          "regular": "JetBrainsMono-Regular",
+          "medium": "JetBrainsMono-Medium"
+        },
+        "usage": "Used for amounts, account numbers, OTP codes, and card numbers",
+        "source": "https://fonts.google.com/specimen/JetBrains+Mono",
+        "license": "SIL Open Font License"
+      }
+    },
+
+    "scale": {
+      "display": {
+        "fontSize": 36,
+        "lineHeight": 44,
+        "fontFamily": "PlusJakartaSans-Bold",
+        "letterSpacing": -1.0,
+        "usage": "Balance amounts, hero numbers"
+      },
+      "h1": {
+        "fontSize": 28,
+        "lineHeight": 36,
+        "fontFamily": "PlusJakartaSans-Bold",
+        "letterSpacing": -0.5,
+        "usage": "Screen titles, primary headings"
+      },
+      "h2": {
+        "fontSize": 22,
+        "lineHeight": 28,
+        "fontFamily": "PlusJakartaSans-SemiBold",
+        "letterSpacing": -0.3,
+        "usage": "Section titles, card titles"
+      },
+      "h3": {
+        "fontSize": 18,
+        "lineHeight": 24,
+        "fontFamily": "PlusJakartaSans-SemiBold",
+        "letterSpacing": -0.2,
+        "usage": "Subsection titles, modal titles"
+      },
+      "h4": {
+        "fontSize": 16,
+        "lineHeight": 22,
+        "fontFamily": "PlusJakartaSans-Medium",
+        "letterSpacing": 0,
+        "usage": "List item titles, bold labels"
+      },
+      "bodyLarge": {
+        "fontSize": 16,
+        "lineHeight": 24,
+        "fontFamily": "Inter-Regular",
+        "letterSpacing": 0,
+        "usage": "Primary body text, descriptions"
+      },
+      "body": {
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fontFamily": "Inter-Regular",
+        "letterSpacing": 0,
+        "usage": "Default body text, transaction names"
+      },
+      "bodyMedium": {
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fontFamily": "Inter-Medium",
+        "letterSpacing": 0,
+        "usage": "Emphasized body text, button labels"
+      },
+      "bodySemiBold": {
+        "fontSize": 14,
+        "lineHeight": 20,
+        "fontFamily": "Inter-SemiBold",
+        "letterSpacing": 0,
+        "usage": "Strong labels, amounts in lists"
+      },
+      "small": {
+        "fontSize": 12,
+        "lineHeight": 16,
+        "fontFamily": "Inter-Regular",
+        "letterSpacing": 0.1,
+        "usage": "Secondary text, timestamps, categories"
+      },
+      "smallMedium": {
+        "fontSize": 12,
+        "lineHeight": 16,
+        "fontFamily": "Inter-Medium",
+        "letterSpacing": 0.1,
+        "usage": "Badges, tags, status labels"
+      },
+      "caption": {
+        "fontSize": 11,
+        "lineHeight": 14,
+        "fontFamily": "Inter-Regular",
+        "letterSpacing": 0.2,
+        "usage": "Helper text, fine print, disclaimers"
+      },
+      "overline": {
+        "fontSize": 11,
+        "lineHeight": 14,
+        "fontFamily": "Inter-SemiBold",
+        "letterSpacing": 1.0,
+        "textTransform": "uppercase",
+        "usage": "Section labels, category headers (INCOME, EXPENSES)"
+      },
+      "amount": {
+        "fontSize": 18,
+        "lineHeight": 24,
+        "fontFamily": "JetBrainsMono-Medium",
+        "letterSpacing": -0.3,
+        "usage": "Transaction amounts, prices"
+      },
+      "amountLarge": {
+        "fontSize": 36,
+        "lineHeight": 44,
+        "fontFamily": "JetBrainsMono-Medium",
+        "letterSpacing": -1.0,
+        "usage": "Main balance display"
+      },
+      "amountSmall": {
+        "fontSize": 14,
+        "lineHeight": 18,
+        "fontFamily": "JetBrainsMono-Regular",
+        "letterSpacing": 0,
+        "usage": "Small amounts, converted values"
+      },
+      "cardNumber": {
+        "fontSize": 16,
+        "lineHeight": 22,
+        "fontFamily": "JetBrainsMono-Medium",
+        "letterSpacing": 2.0,
+        "usage": "Card numbers, IBAN, account numbers"
+      },
+      "otp": {
+        "fontSize": 24,
+        "lineHeight": 32,
+        "fontFamily": "JetBrainsMono-Medium",
+        "letterSpacing": 8.0,
+        "usage": "OTP input digits, PIN entry"
+      }
+    }
+  },
+
+  "spacing": {
+    "unit": 4,
+    "scale": {
+      "xxs": 2,
+      "xs": 4,
+      "sm": 8,
+      "md": 12,
+      "base": 16,
+      "lg": 20,
+      "xl": 24,
+      "2xl": 32,
+      "3xl": 40,
+      "4xl": 48,
+      "5xl": 64,
+      "6xl": 80
+    },
+    "screen": {
+      "paddingHorizontal": 20,
+      "paddingTop": 16,
+      "paddingBottom": 24,
+      "sectionGap": 24,
+      "contentGap": 16
+    },
+    "card": {
+      "padding": 20,
+      "paddingCompact": 16,
+      "gap": 12,
+      "marginBottom": 16
+    },
+    "list": {
+      "itemPaddingVertical": 14,
+      "itemPaddingHorizontal": 16,
+      "itemGap": 0,
+      "sectionHeaderMarginTop": 24,
+      "sectionHeaderMarginBottom": 12
+    },
+    "form": {
+      "fieldGap": 16,
+      "labelMarginBottom": 6,
+      "helperMarginTop": 4,
+      "sectionGap": 24
+    },
+    "button": {
+      "paddingVertical": 14,
+      "paddingHorizontal": 24,
+      "paddingVerticalSmall": 10,
+      "paddingHorizontalSmall": 16,
+      "gap": 8
+    }
+  },
+
+  "borderRadius": {
+    "none": 0,
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 20,
+    "2xl": 24,
+    "full": 9999,
+    "components": {
+      "button": 12,
+      "buttonSmall": 8,
+      "card": 16,
+      "cardLarge": 20,
+      "input": 12,
+      "badge": 8,
+      "avatar": 9999,
+      "avatarSquare": 16,
+      "bottomSheet": 24,
+      "modal": 20,
+      "toast": 12,
+      "tab": 10,
+      "chip": 20,
+      "iconContainer": 14,
+      "iconContainerSmall": 10,
+      "progressBar": 4,
+      "skeleton": 8,
+      "image": 12
+    }
+  },
+
+  "shadows": {
+    "none": {
+      "shadowColor": "#000",
+      "shadowOffset": { "width": 0, "height": 0 },
+      "shadowOpacity": 0,
+      "shadowRadius": 0,
+      "elevation": 0
+    },
+    "xs": {
+      "shadowColor": "#0F172A",
+      "shadowOffset": { "width": 0, "height": 1 },
+      "shadowOpacity": 0.04,
+      "shadowRadius": 2,
+      "elevation": 1
+    },
+    "sm": {
+      "shadowColor": "#0F172A",
+      "shadowOffset": { "width": 0, "height": 2 },
+      "shadowOpacity": 0.06,
+      "shadowRadius": 4,
+      "elevation": 2
+    },
+    "md": {
+      "shadowColor": "#0F172A",
+      "shadowOffset": { "width": 0, "height": 4 },
+      "shadowOpacity": 0.08,
+      "shadowRadius": 8,
+      "elevation": 4
+    },
+    "lg": {
+      "shadowColor": "#0F172A",
+      "shadowOffset": { "width": 0, "height": 8 },
+      "shadowOpacity": 0.1,
+      "shadowRadius": 16,
+      "elevation": 8
+    },
+    "xl": {
+      "shadowColor": "#0F172A",
+      "shadowOffset": { "width": 0, "height": 12 },
+      "shadowOpacity": 0.15,
+      "shadowRadius": 24,
+      "elevation": 12
+    },
+    "colored": {
+      "primary": {
+        "shadowColor": "#1A6FEF",
+        "shadowOffset": { "width": 0, "height": 4 },
+        "shadowOpacity": 0.25,
+        "shadowRadius": 12,
+        "elevation": 6
+      },
+      "success": {
+        "shadowColor": "#22C55E",
+        "shadowOffset": { "width": 0, "height": 4 },
+        "shadowOpacity": 0.25,
+        "shadowRadius": 12,
+        "elevation": 6
+      },
+      "error": {
+        "shadowColor": "#EF4444",
+        "shadowOffset": { "width": 0, "height": 4 },
+        "shadowOpacity": 0.25,
+        "shadowRadius": 12,
+        "elevation": 6
+      }
+    }
+  },
+
+  "sizes": {
+    "icon": {
+      "xs": 16,
+      "sm": 20,
+      "md": 24,
+      "lg": 28,
+      "xl": 32
+    },
+    "avatar": {
+      "xs": 28,
+      "sm": 36,
+      "md": 44,
+      "lg": 56,
+      "xl": 72,
+      "2xl": 96
+    },
+    "iconContainer": {
+      "sm": 36,
+      "md": 44,
+      "lg": 52,
+      "xl": 64
+    },
+    "button": {
+      "height": 52,
+      "heightSmall": 40,
+      "heightLarge": 56,
+      "minWidth": 120
+    },
+    "input": {
+      "height": 52,
+      "heightSmall": 40,
+      "heightLarge": 56
+    },
+    "badge": {
+      "dot": 8,
+      "small": 18,
+      "default": 22,
+      "large": 28
+    },
+    "tabBar": {
+      "height": 80,
+      "iconSize": 24,
+      "fabSize": 52,
+      "fabIconSize": 24
+    },
+    "header": {
+      "height": 56,
+      "iconSize": 24,
+      "titleFontSize": 18
+    },
+    "card": {
+      "minHeight": 80,
+      "balanceCardHeight": 200,
+      "promoCardHeight": 80
+    },
+    "bottomSheet": {
+      "handleWidth": 40,
+      "handleHeight": 4,
+      "handleMarginTop": 8
+    },
+    "progressBar": {
+      "height": 6,
+      "heightLarge": 8
+    },
+    "divider": {
+      "height": 1
+    },
+    "otp": {
+      "cellSize": 52,
+      "cellGap": 12
+    },
+    "cardPreview": {
+      "width": 320,
+      "height": 200,
+      "borderRadius": 16
+    }
+  },
+
+  "animation": {
+    "duration": {
+      "instant": 100,
+      "fast": 200,
+      "normal": 300,
+      "slow": 500,
+      "verySlow": 800
+    },
+    "easing": {
+      "default": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "easeIn": "cubic-bezier(0.4, 0, 1, 1)",
+      "easeOut": "cubic-bezier(0, 0, 0.2, 1)",
+      "easeInOut": "cubic-bezier(0.4, 0, 0.2, 1)",
+      "spring": { "damping": 15, "stiffness": 150, "mass": 1 },
+      "bounce": { "damping": 10, "stiffness": 200, "mass": 0.8 }
+    },
+    "skeleton": {
+      "shimmerDuration": 1200,
+      "backgroundColor": "#E2E8F0",
+      "highlightColor": "#F1F5F9"
+    }
+  },
+
+  "opacity": {
+    "disabled": 0.4,
+    "pressed": 0.7,
+    "hover": 0.8,
+    "overlay": 0.5,
+    "overlayDark": 0.7,
+    "backdrop": 0.5,
+    "subtle": 0.08,
+    "medium": 0.15,
+    "strong": 0.25
+  },
+
+  "zIndex": {
+    "base": 0,
+    "card": 1,
+    "sticky": 10,
+    "header": 20,
+    "fab": 30,
+    "dropdown": 40,
+    "overlay": 50,
+    "modal": 60,
+    "bottomSheet": 70,
+    "toast": 80,
+    "tooltip": 90,
+    "max": 100
+  },
+
+  "gradients": {
+    "balanceCard": {
+      "light": {
+        "colors": ["#1A6FEF", "#0A4DBF", "#083B96"],
+        "start": { "x": 0, "y": 0 },
+        "end": { "x": 1, "y": 1 }
+      },
+      "dark": {
+        "colors": ["#1E3A6E", "#162D56", "#0F2240"],
+        "start": { "x": 0, "y": 0 },
+        "end": { "x": 1, "y": 1 }
+      }
+    },
+    "header": {
+      "colors": ["#0A1E3D", "#0A1E3D", "#F8FAFC"],
+      "locations": [0, 0.55, 1],
+      "start": { "x": 0.5, "y": 0 },
+      "end": { "x": 0.5, "y": 1 }
+    },
+    "premiumCard": {
+      "colors": ["#1a1a2e", "#16213e", "#0f3460"],
+      "start": { "x": 0, "y": 0 },
+      "end": { "x": 1, "y": 1 }
+    },
+    "goldCard": {
+      "colors": ["#FFD700", "#FFA500", "#FF8C00"],
+      "start": { "x": 0, "y": 0 },
+      "end": { "x": 1, "y": 1 }
+    },
+    "successBanner": {
+      "colors": ["#22C55E", "#16A34A"],
+      "start": { "x": 0, "y": 0 },
+      "end": { "x": 1, "y": 0 }
+    }
+  },
+
+  "components": {
+    "toast": {
+      "maxWidth": 340,
+      "minHeight": 48,
+      "borderRadius": 12,
+      "padding": { "vertical": 12, "horizontal": 16 },
+      "iconSize": 20,
+      "position": "top",
+      "offsetTop": 60,
+      "duration": 3000,
+      "variants": {
+        "success": { "bg": "#ECFDF5", "border": "#22C55E", "icon": "#22C55E", "text": "#166534" },
+        "error": { "bg": "#FEF2F2", "border": "#EF4444", "icon": "#EF4444", "text": "#991B1B" },
+        "warning": { "bg": "#FFFBEB", "border": "#F59E0B", "icon": "#F59E0B", "text": "#92400E" },
+        "info": { "bg": "#EFF6FF", "border": "#3B82F6", "icon": "#3B82F6", "text": "#1E40AF" }
+      }
+    },
+    "emptyState": {
+      "illustrationSize": 160,
+      "titleFontSize": 18,
+      "descriptionFontSize": 14,
+      "spacing": 16
+    },
+    "statusBadge": {
+      "completed": { "bg": "rgba(34, 197, 94, 0.1)", "text": "#16A34A", "dot": "#22C55E" },
+      "pending": { "bg": "rgba(245, 158, 11, 0.1)", "text": "#D97706", "dot": "#F59E0B" },
+      "failed": { "bg": "rgba(239, 68, 68, 0.1)", "text": "#DC2626", "dot": "#EF4444" },
+      "frozen": { "bg": "rgba(100, 116, 139, 0.1)", "text": "#475569", "dot": "#64748B" },
+      "active": { "bg": "rgba(34, 197, 94, 0.1)", "text": "#16A34A", "dot": "#22C55E" }
+    },
+    "kycBadge": {
+      "unverified": { "bg": "#FEF2F2", "text": "#DC2626", "border": "#FECACA" },
+      "basic": { "bg": "#FFFBEB", "text": "#D97706", "border": "#FDE68A" },
+      "intermediate": { "bg": "#EFF6FF", "text": "#2563EB", "border": "#BFDBFE" },
+      "full": { "bg": "#ECFDF5", "text": "#16A34A", "border": "#A7F3D0" }
+    }
+  },
+
+  "presetThemes": {
+    "default": {
+      "name": "Ocean Blue",
+      "description": "Default FinWallet theme - professional and trustworthy",
+      "primary": "#1A6FEF",
+      "primaryDark": "#0A1E3D",
+      "accent": "#00B4D8"
+    },
+    "luxury": {
+      "name": "Black & Gold",
+      "description": "Premium dark theme for luxury card apps",
+      "primary": "#1A1A2E",
+      "primaryDark": "#0D0D1A",
+      "accent": "#FFB800"
+    },
+    "emerald": {
+      "name": "Emerald Green",
+      "description": "Fresh green theme inspired by Wise/TransferWise",
+      "primary": "#059669",
+      "primaryDark": "#064E3B",
+      "accent": "#10B981"
+    }
+  },
+
+  "breakpoints": {
+    "note": "React Native does not use CSS breakpoints, but these are useful for responsive layout decisions",
+    "smallPhone": 320,
+    "phone": 375,
+    "largePhone": 414,
+    "tablet": 768,
+    "tabletLandscape": 1024
+  }
+}
