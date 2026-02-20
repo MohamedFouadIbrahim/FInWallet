@@ -2,9 +2,14 @@
 module.exports = {
   content: ['./App.{js,jsx,ts,tsx}', './src/**/*.{js,jsx,ts,tsx}'],
   presets: [require('nativewind/preset')],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
+        // --- Theme-aware (CSS variable backed, switches per preset) ---
+        'theme-primary':   'var(--color-primary)',
+        'theme-secondary': 'var(--color-secondary)',
+        'theme-accent':    'var(--color-accent)',
         // --- Brand ---
         primary: {
           50: '#E8F0FE', 100: '#C5D9FC', 200: '#90B4F9', 300: '#5B8EF6',

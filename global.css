@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ─── Color preset variables ─────────────────────────────────────────────── */
+
+/* Default: ocean-blue */
+:root {
+  --color-primary:   #1A6FEF;
+  --color-secondary: #00B4D8;
+  --color-accent:    #FFB800;
+}
+
+.preset-black-gold {
+  --color-primary:   #FFB800;
+  --color-secondary: #CC9300;
+  --color-accent:    #1A6FEF;
+}
+
+.preset-emerald {
+  --color-primary:   #22C55E;
+  --color-secondary: #16A34A;
+  --color-accent:    #00B4D8;
+}
