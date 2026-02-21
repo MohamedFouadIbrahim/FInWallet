@@ -442,7 +442,21 @@ const isLandscape = width > height;
 If the design includes SVG icons, follow this exact workflow:
 
 ### 8.1 — Get the SVG from Figma
-Call `mcp__figma-desktop__get_design_context` on the icon node to retrieve its SVG markup. Figma exports vector layers as raw SVG.
+
+1. Call `mcp__figma-desktop__get_design_context` on the icon node.
+   - If Figma returns an `<img>` tag with `src` pointing to a localhost URL
+     (e.g. `http://localhost:3845/assets/<hash>.svg`), the SVG is hosted
+     on the Figma local asset server — `WebFetch` **cannot** access it.
+   - Use Bash `curl` to fetch the raw SVG markup:
+
+     ```bash
+     curl -s "http://localhost:3845/assets/<hash>.svg"
+     ```
+
+   - Parse the returned SVG and convert to `react-native-svg` (Step 8.3).
+
+2. If Figma returns inline SVG markup directly in the code output,
+   use it as-is without a `curl` step.
 
 ### 8.2 — Save the raw SVG file
 Create a `.svg` file in `assets/icons/` using the icon's Figma layer name (kebab-case):
@@ -528,7 +542,22 @@ When implementing from Figma, go beyond a mechanical pixel-copy. Apply the Anthr
 
 ---
 
-## Step 10: Visual Verification
+## Step 10: Apply React Native Best Practices
+
+Apply the `react-native-best-practices` skill to ensure production-grade performance:
+
+- **Animations** — use `react-native-reanimated` (not the legacy `Animated` API) so animations run on the UI thread at 60fps.
+- **Lists** — use `FlashList` (`@shopify/flash-list`) instead of `FlatList` for scrollable lists; set `estimatedItemSize` correctly.
+- **Re-renders** — wrap components in `React.memo` where appropriate. Never create inline objects/functions inside JSX (`style={{ ... }}` allocates a new object on every render — extract to a `const` outside the component or use `StyleSheet.create`).
+- **Images** — set `resizeMode`; prefer `react-native-fast-image` for network images. (igonre this for now)
+- **JS thread** — no heavy computation in the render cycle; offload with `useMemo` / `useCallback`.
+- **Bundle** — import only what's needed; avoid barrel imports that pull in entire libraries.
+
+For complex animations or gesture-heavy interactions, consult the full `react-native-best-practices` skill.
+
+---
+
+## Step 11: Visual Verification
 
 After generating code, call `mcp__figma-desktop__get_screenshot` to display the original Figma design. Present it to the user so they can compare the implementation against the source design and request adjustments.
 
@@ -549,6 +578,7 @@ After generating code, call `mcp__figma-desktop__get_screenshot` to display the 
                                        component in src/components/ui/icons/
 6. Write the component(s)            → NativeWind classes + dark: pairs, correct file
                                        placement, production design quality (Step 9)
-7. get_screenshot(nodeId)            → show reference for visual comparison
-8. Note any discrepancies            → ask user if adjustments needed
+7. Apply RN best practices (Step 10) → reanimated, FlashList, memo, no inline objects
+8. get_screenshot(nodeId)            → show Figma reference for visual comparison
+9. Note any discrepancies            → ask user if adjustments needed
 ```

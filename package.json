@@ -22,6 +22,7 @@
     "@react-navigation/native-stack": "^7.13.0",
     "@reduxjs/toolkit": "^2.11.2",
     "@sbaiahmed1/react-native-biometrics": "^0.12.2",
+    "@shopify/flash-list": "^2.2.2",
     "@shopify/react-native-skia": "^2.4.21",
     "axios": "^1.13.5",
     "date-fns": "^4.1.0",
