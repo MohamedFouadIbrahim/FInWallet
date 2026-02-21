@@ -85,7 +85,15 @@ export default function GetStartedScreen({ navigation }: Props) {
             />
 
             {/* Create Account */}
-            <AppButton label="Create Account" variant="secondary" />
+            <AppButton
+              label="Create Account"
+              variant="secondary"
+              onPress={() =>
+                navigation
+                  .getParent<NativeStackNavigationProp<RootStackParamList>>()
+                  ?.navigate('Auth', { screen: 'CreateAccount' })
+              }
+            />
 
             {/* Legal text */}
             <Text

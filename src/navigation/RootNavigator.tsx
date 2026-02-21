@@ -1,11 +1,12 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
+import type { AuthStackParamList } from '@features/auth/navigation/AuthNavigator';
 import AuthNavigator from '@features/auth/navigation/AuthNavigator';
 import OnboardingNavigator from '@features/onboarding/navigation/OnboardingNavigator';
 
 export type RootStackParamList = {
   Onboarding: undefined;
-  Auth: undefined;
+  Auth: { screen: keyof AuthStackParamList } | undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
