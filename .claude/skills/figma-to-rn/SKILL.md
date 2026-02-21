@@ -321,21 +321,31 @@ export default MyComponent;
 
 ## Step 6: Safe Area & Screen Awareness
 
-For full-screen components (screens, modals):
-```tsx
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+**Every screen must use `ScreenWrapper` as its root element.** This component wraps `SafeAreaView` internally and handles all insets automatically. Never use `useSafeAreaInsets` or `SafeAreaView` directly in screens.
 
-const MyScreen = () => {
-  const insets = useSafeAreaInsets();
-  return (
-    <View style={{ flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom }}>
-      {/* content */}
-    </View>
-  );
-};
+```tsx
+import ScreenWrapper from '@components/layout/ScreenWrapper';
+
+// Standard screen — all edges (default)
+const MyScreen = () => (
+  <ScreenWrapper>
+    {/* content — no paddingTop/paddingBottom inset handling needed */}
+  </ScreenWrapper>
+);
+
+// Top-only — e.g. screen with a custom tab bar that handles its own bottom
+const MyTabScreen = () => (
+  <ScreenWrapper edges={['top', 'left', 'right']}>
+    {/* content */}
+  </ScreenWrapper>
+);
 ```
 
-Or use `<SafeAreaView>` from `react-native-safe-area-context` directly.
+**Rules:**
+- `ScreenWrapper` provides `flex: 1` + `bg-white dark:bg-neutral-900` by default
+- Inner content uses **design-spec padding only** (e.g. `pb-xl`, `paddingBottom: 40`) — no `Math.max(insets.bottom, X)` needed
+- **Exception:** `SplashScreen` is full-bleed gradient — do not wrap it with `ScreenWrapper`
+- Never use `useSafeAreaInsets` in screens; it is only for custom components that need precise inset values (e.g. a floating action button)
 
 ---
 
@@ -576,7 +586,8 @@ After generating code, call `mcp__figma-desktop__get_screenshot` to display the 
                                        helpers, tablet maxWidth containers
 5. SVG icons (Step 8)                → save to assets/icons/, convert to RN SVG
                                        component in src/components/ui/icons/
-6. Write the component(s)            → NativeWind classes + dark: pairs, correct file
+6. Write the component(s)            → wrap screens in ScreenWrapper (Step 6),
+                                       NativeWind classes + dark: pairs, correct file
                                        placement, production design quality (Step 9)
 7. Apply RN best practices (Step 10) → reanimated, FlashList, memo, no inline objects
 8. get_screenshot(nodeId)            → show Figma reference for visual comparison

@@ -1,25 +1,21 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import ShieldIcon from '@components/ui/icons/ShieldIcon';
 import WalletIcon from '@components/ui/icons/WalletIcon';
+import ScreenWrapper from '@components/layout/ScreenWrapper';
 import { useTheme } from '@theme/useTheme';
 import type { OnboardingStackParamList } from '@features/onboarding/navigation/OnboardingNavigator';
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, 'GetStarted'>;
 
 export default function GetStartedScreen({ navigation: _navigation }: Props) {
-  const insets = useSafeAreaInsets();
   const { isDark } = useTheme();
 
   return (
-    <View
-      className="flex-1 bg-white dark:bg-neutral-900"
-      style={{ paddingTop: insets.top }}
-    >
+    <ScreenWrapper>
       <View style={styles.content}>
         {/* ── Hero ── */}
         <View style={styles.hero}>
@@ -73,7 +69,7 @@ export default function GetStartedScreen({ navigation: _navigation }: Props) {
         </View>
 
         {/* ── Bottom Actions ── */}
-        <View style={{ paddingBottom: Math.max(insets.bottom, 40) }}>
+        <View style={styles.bottomPadding}>
           <View style={styles.buttons}>
             {/* Sign In */}
             <Pressable
@@ -122,7 +118,7 @@ export default function GetStartedScreen({ navigation: _navigation }: Props) {
           </View>
         </View>
       </View>
-    </View>
+    </ScreenWrapper>
   );
 }
 
@@ -213,5 +209,8 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 18,
     color: '#2563EB',
+  },
+  bottomPadding: {
+    paddingBottom: 40,
   },
 });

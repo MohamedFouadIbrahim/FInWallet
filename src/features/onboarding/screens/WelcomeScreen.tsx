@@ -10,12 +10,12 @@ import {
   View,
   ViewToken,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import GlobeIcon from '@components/ui/icons/GlobeIcon';
 import ShieldIcon from '@components/ui/icons/ShieldIcon';
 import TrendingUpIcon from '@components/ui/icons/TrendingUpIcon';
+import ScreenWrapper from '@components/layout/ScreenWrapper';
 import { useTheme } from '@theme/useTheme';
 import type { OnboardingStackParamList } from '@features/onboarding/navigation/OnboardingNavigator';
 
@@ -60,7 +60,6 @@ const slides: WalkthroughSlide[] = [
 ];
 
 export default function WelcomeScreen({ navigation }: Props) {
-  const insets = useSafeAreaInsets();
   const { isDark } = useTheme();
 
   const flatListRef = useRef<FlatList<WalkthroughSlide>>(null);
@@ -140,10 +139,7 @@ export default function WelcomeScreen({ navigation }: Props) {
   );
 
   return (
-    <View
-      className="flex-1 bg-white dark:bg-neutral-900"
-      style={{ paddingTop: insets.top }}
-    >
+    <ScreenWrapper>
       {/* ── Slides ── */}
       <FlatList
         ref={flatListRef}
@@ -159,10 +155,7 @@ export default function WelcomeScreen({ navigation }: Props) {
       />
 
       {/* ── Bottom Controls ── */}
-      <View
-        className="items-center gap-xl px-xl pb-3xl"
-        style={{ paddingBottom: Math.max(insets.bottom, 24) }}
-      >
+      <View className="items-center gap-xl px-xl pb-xl">
         <PaginationDots total={slides.length} activeIndex={activeIndex} />
 
         <Pressable
@@ -182,7 +175,7 @@ export default function WelcomeScreen({ navigation }: Props) {
           </Text>
         </Pressable>
       </View>
-    </View>
+    </ScreenWrapper>
   );
 }
 

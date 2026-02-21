@@ -6,10 +6,10 @@ import {
   Text,
   View,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import CheckIcon from '@components/ui/icons/CheckIcon';
+import ScreenWrapper from '@components/layout/ScreenWrapper';
 import { useTheme } from '@theme/useTheme';
 import type { OnboardingStackParamList } from '@features/onboarding/navigation/OnboardingNavigator';
 
@@ -29,20 +29,13 @@ const LANGUAGES: Language[] = [
 ];
 
 export default function ChooseLanguageScreen({ navigation }: Props) {
-  const insets = useSafeAreaInsets();
   const { isDark } = useTheme();
   const [selectedId, setSelectedId] = useState('en');
 
   return (
-    <View
-      className="flex-1 bg-white dark:bg-neutral-900"
-      style={{ paddingTop: insets.top }}
-    >
+    <ScreenWrapper>
       <ScrollView
-        contentContainerStyle={[
-          styles.content,
-          { paddingBottom: Math.max(insets.bottom, 40) },
-        ]}
+        contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
         {/* ── Header ── */}
@@ -139,7 +132,7 @@ export default function ChooseLanguageScreen({ navigation }: Props) {
           </Text>
         </Pressable>
       </ScrollView>
-    </View>
+    </ScreenWrapper>
   );
 }
 
@@ -147,6 +140,7 @@ const styles = StyleSheet.create({
   content: {
     paddingHorizontal: 24,
     paddingTop: 48,
+    paddingBottom: 40,
     gap: 40,
     flexGrow: 1,
   },
