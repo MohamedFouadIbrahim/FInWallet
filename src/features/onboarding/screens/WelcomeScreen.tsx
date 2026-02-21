@@ -11,13 +11,17 @@ import {
   ViewToken,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import GlobeIcon from '@components/ui/icons/GlobeIcon';
 import ShieldIcon from '@components/ui/icons/ShieldIcon';
 import TrendingUpIcon from '@components/ui/icons/TrendingUpIcon';
 import { useTheme } from '@theme/useTheme';
+import type { OnboardingStackParamList } from '@features/onboarding/navigation/OnboardingNavigator';
 
 import PaginationDots from '@features/onboarding/components/PaginationDots';
+
+type Props = NativeStackScreenProps<OnboardingStackParamList, 'Welcome'>;
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -55,7 +59,7 @@ const slides: WalkthroughSlide[] = [
   },
 ];
 
-export default function WelcomeScreen() {
+export default function WelcomeScreen({ navigation }: Props) {
   const insets = useSafeAreaInsets();
   const { isDark } = useTheme();
 
@@ -81,7 +85,7 @@ export default function WelcomeScreen() {
     if (next < slides.length) {
       flatListRef.current?.scrollToIndex({ index: next, animated: true });
     } else {
-      // TODO: Navigate to GetStarted / Auth screen
+      navigation.navigate('ChooseLanguage');
     }
   };
 

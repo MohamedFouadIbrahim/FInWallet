@@ -7,9 +7,13 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import CheckIcon from '@components/ui/icons/CheckIcon';
 import { useTheme } from '@theme/useTheme';
+import type { OnboardingStackParamList } from '@features/onboarding/navigation/OnboardingNavigator';
+
+type Props = NativeStackScreenProps<OnboardingStackParamList, 'ChooseLanguage'>;
 
 interface Language {
   id: string;
@@ -24,7 +28,7 @@ const LANGUAGES: Language[] = [
   { id: 'fr', flag: '🇫🇷', name: 'French', nativeName: 'Français' },
 ];
 
-export default function ChooseLanguageScreen() {
+export default function ChooseLanguageScreen({ navigation }: Props) {
   const insets = useSafeAreaInsets();
   const { isDark } = useTheme();
   const [selectedId, setSelectedId] = useState('en');
@@ -124,6 +128,7 @@ export default function ChooseLanguageScreen() {
           style={styles.continueBtn}
           className="active:opacity-pressed"
           accessibilityLabel="Continue"
+          onPress={() => navigation.navigate('GetStarted')}
         >
           <Text
             className="text-white font-inter-semibold"

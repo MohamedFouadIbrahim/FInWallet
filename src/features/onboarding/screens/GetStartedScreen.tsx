@@ -2,12 +2,16 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import ShieldIcon from '@components/ui/icons/ShieldIcon';
 import WalletIcon from '@components/ui/icons/WalletIcon';
 import { useTheme } from '@theme/useTheme';
+import type { OnboardingStackParamList } from '@features/onboarding/navigation/OnboardingNavigator';
 
-export default function GetStartedScreen() {
+type Props = NativeStackScreenProps<OnboardingStackParamList, 'GetStarted'>;
+
+export default function GetStartedScreen({ navigation: _navigation }: Props) {
   const insets = useSafeAreaInsets();
   const { isDark } = useTheme();
 
