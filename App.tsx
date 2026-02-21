@@ -1,7 +1,7 @@
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { NavigationContainer } from '@react-navigation/native';
-import OnboardingNavigator from '@features/onboarding/navigation/OnboardingNavigator';
 import { Providers } from '@/app/Providers';
+import RootNavigator from '@/navigation/RootNavigator';
 import './global.css';
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
     <SafeAreaProvider>
       <Providers>
         <NavigationContainer>
-          <OnboardingNavigator />
+          <RootNavigator />
         </NavigationContainer>
       </Providers>
     </SafeAreaProvider>

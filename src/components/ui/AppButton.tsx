@@ -13,6 +13,7 @@ interface Props {
   label: string;
   onPress?: () => void;
   variant?: 'primary' | 'secondary';
+  disabled?: boolean;
   accessibilityLabel?: string;
   style?: StyleProp<ViewStyle>;
 }
@@ -21,6 +22,7 @@ export default function AppButton({
   label,
   onPress,
   variant = 'primary',
+  disabled = false,
   accessibilityLabel,
   style,
 }: Props) {
@@ -31,12 +33,15 @@ export default function AppButton({
       style={[
         styles.base,
         variant === 'primary'
-          ? styles.primary
+          ? disabled
+            ? styles.primaryDisabled
+            : styles.primary
           : [styles.secondary, isDark && styles.secondaryDark],
         style,
       ]}
       className="active:opacity-pressed"
       onPress={onPress}
+      disabled={disabled}
       accessibilityLabel={accessibilityLabel ?? label}
     >
       <Text
@@ -63,6 +68,10 @@ const styles = StyleSheet.create({
   },
   primary: {
     backgroundColor: '#2563EB',
+  },
+  primaryDisabled: {
+    backgroundColor: '#D1D5DB',
+    opacity: 0.5,
   },
   secondary: {
     backgroundColor: '#FFFFFF',

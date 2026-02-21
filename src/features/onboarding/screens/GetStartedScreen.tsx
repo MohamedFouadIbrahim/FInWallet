@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import ShieldIcon from '@components/ui/icons/ShieldIcon';
@@ -9,10 +10,11 @@ import ScreenWrapper from '@components/layout/ScreenWrapper';
 import AppButton from '@components/ui/AppButton';
 import { useTheme } from '@theme/useTheme';
 import type { OnboardingStackParamList } from '@features/onboarding/navigation/OnboardingNavigator';
+import type { RootStackParamList } from '@/navigation/RootNavigator';
 
 type Props = NativeStackScreenProps<OnboardingStackParamList, 'GetStarted'>;
 
-export default function GetStartedScreen({ navigation: _navigation }: Props) {
+export default function GetStartedScreen({ navigation }: Props) {
   const { isDark } = useTheme();
 
   return (
@@ -73,7 +75,14 @@ export default function GetStartedScreen({ navigation: _navigation }: Props) {
         <View style={styles.bottomPadding}>
           <View style={styles.buttons}>
             {/* Sign In */}
-            <AppButton label="Sign In" />
+            <AppButton
+              label="Sign In"
+              onPress={() =>
+                navigation
+                  .getParent<NativeStackNavigationProp<RootStackParamList>>()
+                  ?.navigate('Auth')
+              }
+            />
 
             {/* Create Account */}
             <AppButton label="Create Account" variant="secondary" />
