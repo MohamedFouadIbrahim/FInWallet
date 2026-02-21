@@ -38,8 +38,7 @@ export default function LoginScreen({ navigation }: Props) {
       return;
     }
     setError('');
-    // TODO: navigate to next auth step (PIN / OTP)
-    console.log('Proceed with:', value);
+    navigation.navigate('EnterPin');
   };
 
   const inputBorderStyle = error
