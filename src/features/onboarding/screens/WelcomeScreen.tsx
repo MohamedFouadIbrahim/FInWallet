@@ -4,7 +4,6 @@ import {
   FlatList,
   Image,
   ListRenderItem,
-  Pressable,
   StyleSheet,
   Text,
   View,
@@ -16,6 +15,7 @@ import GlobeIcon from '@components/ui/icons/GlobeIcon';
 import ShieldIcon from '@components/ui/icons/ShieldIcon';
 import TrendingUpIcon from '@components/ui/icons/TrendingUpIcon';
 import ScreenWrapper from '@components/layout/ScreenWrapper';
+import AppButton from '@components/ui/AppButton';
 import { useTheme } from '@theme/useTheme';
 import type { OnboardingStackParamList } from '@features/onboarding/navigation/OnboardingNavigator';
 
@@ -158,22 +158,16 @@ export default function WelcomeScreen({ navigation }: Props) {
       <View className="items-center gap-xl px-xl pb-xl">
         <PaginationDots total={slides.length} activeIndex={activeIndex} />
 
-        <Pressable
-          className="w-full h-btn bg-info-600 rounded-md items-center justify-center active:opacity-pressed"
+        <AppButton
+          label={activeIndex === slides.length - 1 ? 'Get Started' : 'Continue'}
           onPress={handleContinue}
           accessibilityLabel={
             activeIndex === slides.length - 1
               ? 'Get started'
               : 'Continue to next slide'
           }
-        >
-          <Text
-            className="text-body-lg font-inter-semibold text-white"
-            allowFontScaling={false}
-          >
-            {activeIndex === slides.length - 1 ? 'Get Started' : 'Continue'}
-          </Text>
-        </Pressable>
+          style={styles.button}
+        />
       </View>
     </ScreenWrapper>
   );
@@ -182,6 +176,9 @@ export default function WelcomeScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   list: {
     flex: 1,
+  },
+  button: {
+    alignSelf: 'stretch',
   },
   imageCard: {
     height: 280,

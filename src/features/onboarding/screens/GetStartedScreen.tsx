@@ -1,11 +1,12 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import ShieldIcon from '@components/ui/icons/ShieldIcon';
 import WalletIcon from '@components/ui/icons/WalletIcon';
 import ScreenWrapper from '@components/layout/ScreenWrapper';
+import AppButton from '@components/ui/AppButton';
 import { useTheme } from '@theme/useTheme';
 import type { OnboardingStackParamList } from '@features/onboarding/navigation/OnboardingNavigator';
 
@@ -72,34 +73,10 @@ export default function GetStartedScreen({ navigation: _navigation }: Props) {
         <View style={styles.bottomPadding}>
           <View style={styles.buttons}>
             {/* Sign In */}
-            <Pressable
-              style={styles.signInBtn}
-              className="active:opacity-pressed"
-              accessibilityLabel="Sign In"
-            >
-              <Text
-                className="text-white font-inter-semibold text-center"
-                style={styles.btnText}
-                allowFontScaling={false}
-              >
-                Sign In
-              </Text>
-            </Pressable>
+            <AppButton label="Sign In" />
 
             {/* Create Account */}
-            <Pressable
-              style={[styles.createBtn, isDark && styles.createBtnDark]}
-              className="active:opacity-pressed"
-              accessibilityLabel="Create Account"
-            >
-              <Text
-                className="text-neutral-900 dark:text-neutral-50 font-inter-semibold text-center"
-                style={styles.btnText}
-                allowFontScaling={false}
-              >
-                Create Account
-              </Text>
-            </Pressable>
+            <AppButton label="Create Account" variant="secondary" />
 
             {/* Legal text */}
             <Text
@@ -176,30 +153,6 @@ const styles = StyleSheet.create({
   },
   buttons: {
     gap: 12,
-  },
-  signInBtn: {
-    height: 52,
-    borderRadius: 12,
-    backgroundColor: '#2563EB',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  createBtn: {
-    height: 52,
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  createBtnDark: {
-    backgroundColor: '#1E293B',
-    borderColor: '#334155',
-  },
-  btnText: {
-    fontSize: 16,
-    lineHeight: 22.857,
   },
   legalText: {
     fontSize: 12,

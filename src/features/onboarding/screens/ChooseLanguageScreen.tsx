@@ -10,6 +10,7 @@ import type { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 import CheckIcon from '@components/ui/icons/CheckIcon';
 import ScreenWrapper from '@components/layout/ScreenWrapper';
+import AppButton from '@components/ui/AppButton';
 import { useTheme } from '@theme/useTheme';
 import type { OnboardingStackParamList } from '@features/onboarding/navigation/OnboardingNavigator';
 
@@ -117,20 +118,10 @@ export default function ChooseLanguageScreen({ navigation }: Props) {
         </View>
 
         {/* ── Continue Button ── */}
-        <Pressable
-          style={styles.continueBtn}
-          className="active:opacity-pressed"
-          accessibilityLabel="Continue"
+        <AppButton
+          label="Continue"
           onPress={() => navigation.navigate('GetStarted')}
-        >
-          <Text
-            className="text-white font-inter-semibold"
-            style={styles.continueBtnText}
-            allowFontScaling={false}
-          >
-            Continue
-          </Text>
-        </Pressable>
+        />
       </ScrollView>
     </ScreenWrapper>
   );
@@ -217,16 +208,5 @@ const styles = StyleSheet.create({
   },
   indicatorUnselectedDark: {
     borderColor: '#4B5563',
-  },
-  continueBtn: {
-    height: 52,
-    borderRadius: 12,
-    backgroundColor: '#2563EB',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  continueBtnText: {
-    fontSize: 16,
-    lineHeight: 22.857,
   },
 });
