@@ -13,6 +13,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { Path, Rect, Circle } from 'react-native-svg';
 
 import DashboardNavigator from '@features/dashboard/navigation/DashboardNavigator';
+import WalletOverviewScreen from '@features/wallet/screens/WalletOverviewScreen';
 
 // ── Placeholder screens ───────────────────────────────────────────────────────
 
@@ -205,7 +206,7 @@ export default function MainTabNavigator() {
       screenOptions={{ headerShown: false }}
     >
       <Tab.Screen name="Home" component={DashboardNavigator} />
-      <Tab.Screen name="Wallet" component={PlaceholderScreen} />
+      <Tab.Screen name="Wallet" component={WalletOverviewScreen} />
       <Tab.Screen name="Scan" component={PlaceholderScreen} />
       <Tab.Screen name="Analytics" component={PlaceholderScreen} />
       <Tab.Screen name="Profile" component={PlaceholderScreen} />

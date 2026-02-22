@@ -145,3 +145,15 @@ After placing fonts, run `npx react-native-asset` to link them to native project
 | `react-native-reanimated` | 3.x (planned) | Animations |
 | `react-native-gesture-handler` | 2.x (planned) | Gesture handling |
 | `react-native-svg` | latest (planned) | SVG support |
+
+## Performance & Best Practices
+
+Apply the following rules on **every** screen or component implementation:
+
+- **No inline objects/functions in JSX** — never write `style={{ ... }}` or `onPress={() => fn()}` inside JSX when the component re-renders frequently; use NativeWind `className` for styles, or extract to `StyleSheet` / `useCallback`
+- **Memoize child props** — wrap callbacks passed as props in `useCallback`; wrap expensive derived values in `useMemo`
+- **Lists** — use `FlashList` (with `estimatedItemSize`) instead of `FlatList` for any list that may exceed 20 items
+- **Animations** — run on the UI thread via Reanimated worklets (`useAnimatedStyle`, `runOnUI`); never drive animations from `useState`
+- **Images** — always set explicit `width`/`height`; use `resizeMode="cover"` or `"contain"`; prefer cached sources
+- **Avoid layout thrash** — do not read layout measurements (`onLayout`, `measure`) inside render; cache them in a ref
+- **JS thread** — keep the JS thread free; offload heavy computation (parsing, sorting large arrays) outside the render cycle
