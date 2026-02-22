@@ -386,6 +386,10 @@ const WEEKLY_DATA = [
   { day: 'Su', height: 1.0, isToday: true },
 ];
 
+// ── Computed layout constant ───────────────────────────────────────────────────
+
+const CARD_WIDTH = SCREEN_WIDTH - 48;
+
 // ── PromoCarouselCard ─────────────────────────────────────────────────────────
 
 interface PromoCardProps {
@@ -395,26 +399,28 @@ interface PromoCardProps {
 function PromoCarouselCard({ card }: PromoCardProps) {
   return (
     <View
-      style={[
-        styles.promoCard,
-        { backgroundColor: card.gradient[0] },
-      ]}
+      className="h-[127px] rounded-[18px] p-[18px] overflow-hidden justify-between"
+      style={{ width: CARD_WIDTH, backgroundColor: card.gradient[0] }}
     >
       {/* Decorative circle */}
-      <View style={styles.promoCircle} />
+      <View className="absolute w-[88px] h-[88px] rounded-full bg-[rgba(255,255,255,0.1)] -top-[24px] right-base" />
       {/* Badge */}
-      <View style={styles.promoBadge}>
-        <Text style={styles.promoBadgeText} allowFontScaling={false}>
+      <View className="bg-[rgba(255,255,255,0.22)] rounded-full px-[9px] h-[21px] self-start justify-center">
+        <Text className="font-inter-semibold text-[10px] text-white leading-[15px]" allowFontScaling={false}>
           {card.badge}
         </Text>
       </View>
       {/* Bottom row */}
-      <View style={styles.promoBottom}>
-        <View style={styles.promoTextWrap}>
-          <Text style={styles.promoTitle} allowFontScaling={false}>
+      <View className="flex-row items-end justify-between">
+        <View className="flex-1 gap-xs">
+          <Text className="font-jakarta-bold text-[19px] text-white leading-[22.8px]" allowFontScaling={false}>
             {card.title}
           </Text>
-          <Text style={styles.promoSubtitle} allowFontScaling={false}>
+          <Text
+            className="font-inter-regular text-small text-[rgba(255,255,255,0.78)] leading-[16.8px]"
+            style={{ maxWidth: 148 }}
+            allowFontScaling={false}
+          >
             {card.subtitle}
           </Text>
         </View>
@@ -434,30 +440,31 @@ function TransactionRow({
   isLast: boolean;
 }) {
   return (
-    <View style={styles.txRowWrap}>
-      <View style={styles.txRow}>
-        <View style={[styles.txIconWrap, { backgroundColor: item.iconBg }]}>
+    <View className="relative">
+      <View className="flex-row items-center px-base gap-md h-[72px]">
+        <View
+          className="w-[44px] h-[44px] rounded-[14px] items-center justify-center shrink-0"
+          style={{ backgroundColor: item.iconBg }}
+        >
           {item.icon}
         </View>
-        <View style={styles.txInfo}>
-          <Text style={styles.txTitle} allowFontScaling={false}>
+        <View className="flex-1 gap-[2px]">
+          <Text className="font-inter-semibold text-body leading-[21px] text-[#111827] dark:text-neutral-50" allowFontScaling={false}>
             {item.title}
           </Text>
-          <Text style={styles.txSubtitle} allowFontScaling={false}>
+          <Text className="font-inter-regular text-small leading-[18px] text-[#9CA3AF] dark:text-neutral-500" allowFontScaling={false}>
             {item.subtitle}
           </Text>
         </View>
         <Text
-          style={[
-            styles.txAmount,
-            { color: item.isCredit ? '#059669' : '#111827' },
-          ]}
+          className="font-jakarta-bold text-[15px] leading-[22.5px]"
+          style={{ color: item.isCredit ? '#059669' : '#111827' }}
           allowFontScaling={false}
         >
           {item.amount}
         </Text>
       </View>
-      {!isLast && <View style={styles.txDivider} />}
+      {!isLast && <View className="h-divider bg-[#F3F4F6] ml-[72px]" />}
     </View>
   );
 }
@@ -481,54 +488,57 @@ export default function HomeScreen() {
     <ScreenWrapper edges={['top', 'left', 'right']}>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
+        contentContainerStyle={{ paddingBottom: 16 }}
       >
         {/* ── Header ───────────────────────────────────────────────────── */}
-        <View style={styles.header}>
+        <View className="flex-row items-center px-xl pt-[10px] pb-xs h-[64px]">
           {/* Avatar */}
-          <View style={styles.avatar}>
-            <Text style={styles.avatarText} allowFontScaling={false}>
+          <View className="w-[44px] h-[44px] rounded-[14px] items-center justify-center bg-info-600">
+            <Text className="font-jakarta-bold text-[15px] text-white" allowFontScaling={false}>
               AC
             </Text>
           </View>
           {/* Greeting */}
-          <View style={styles.greetingBlock}>
-            <Text style={styles.greetingHi} allowFontScaling={false}>
+          <View className="flex-1 ml-md">
+            <Text className="font-inter-regular text-small leading-[18px] text-[#6B7280]" allowFontScaling={false}>
               Good Morning 👋
             </Text>
-            <Text style={styles.greetingName} allowFontScaling={false}>
+            <Text className="font-jakarta-bold text-[17px] text-[#111827] leading-[25.5px] -mt-[2px]" allowFontScaling={false}>
               Alex Carter
             </Text>
           </View>
           {/* Actions */}
-          <View style={styles.headerActions}>
+          <View className="flex-row gap-sm">
             <Pressable
-              style={styles.headerBtn}
+              className="w-[40px] h-[40px] rounded-md bg-white dark:bg-neutral-800 border border-[#E5E7EB] dark:border-neutral-700 items-center justify-center relative"
               onPress={() => navigation.navigate('Search')}
               accessibilityLabel="Search"
             >
               <SearchIcon />
             </Pressable>
             <Pressable
-              style={styles.headerBtn}
+              className="w-[40px] h-[40px] rounded-md bg-white dark:bg-neutral-800 border border-[#E5E7EB] dark:border-neutral-700 items-center justify-center relative"
               onPress={() => {}}
               accessibilityLabel="Notifications"
             >
               <BellIcon />
-              <View style={styles.notifDot} />
+              <View className="absolute top-[9px] right-[9px] w-[8px] h-[8px] rounded-full bg-error-500 border-2 border-white" />
             </Pressable>
           </View>
         </View>
 
         {/* ── Balance card ─────────────────────────────────────────────── */}
-        <View style={styles.balanceCardWrap}>
-          <View style={styles.balanceCard}>
+        <View className="px-xl mt-md">
+          <View
+            className="rounded-2xl p-xl overflow-hidden bg-info-600"
+            style={styles.balanceCard}
+          >
             {/* Decorative circles */}
-            <View style={styles.deco1} />
-            <View style={styles.deco2} />
+            <View className="absolute w-[168px] h-[168px] rounded-full bg-[rgba(255,255,255,0.06)] -top-[48px] right-[14px]" />
+            <View className="absolute w-[112px] h-[112px] rounded-full bg-[rgba(255,255,255,0.04)] -bottom-[14px] -left-[28px]" />
             {/* Top row */}
-            <View style={styles.balanceTopRow}>
-              <Text style={styles.balanceLabel} allowFontScaling={false}>
+            <View className="flex-row items-center justify-between">
+              <Text className="font-inter-medium text-[13px] text-[rgba(255,255,255,0.72)] leading-[19.5px]" allowFontScaling={false}>
                 Total Balance
               </Text>
               <Pressable accessibilityLabel="Toggle balance visibility">
@@ -536,29 +546,28 @@ export default function HomeScreen() {
               </Pressable>
             </View>
             {/* Amount */}
-            <Text style={styles.balanceAmount} allowFontScaling={false}>
+            <Text className="font-jakarta-bold text-[38px] text-white leading-[42px] tracking-[-0.5px] mt-base" allowFontScaling={false}>
               $12,485.50
             </Text>
             {/* Change row */}
-            <View style={styles.changeRow}>
-              <View style={styles.changeBadge}>
+            <View className="flex-row items-center gap-sm mt-base">
+              <View className="flex-row items-center gap-xs bg-[rgba(16,185,129,0.22)] rounded-full px-[10px] h-[24px]">
                 <TrendUpIcon />
-                <Text style={styles.changeText} allowFontScaling={false}>
+                <Text className="font-inter-semibold text-caption leading-[16.5px] text-success-400" allowFontScaling={false}>
                   +$240.00 (2.5%)
                 </Text>
               </View>
-              <Text style={styles.changeVs} allowFontScaling={false}>
+              <Text className="font-inter-regular text-caption leading-[16.5px] text-[rgba(255,255,255,0.5)]" allowFontScaling={false}>
                 vs yesterday
               </Text>
             </View>
             {/* Top-up button */}
             <Pressable
-              style={styles.topUpBtn}
-              className="active:opacity-pressed"
+              className="flex-row items-center justify-center h-[42px] rounded-md border border-[rgba(255,255,255,0.28)] bg-[rgba(255,255,255,0.16)] mt-xl gap-sm active:opacity-pressed"
               accessibilityLabel="Top Up Wallet"
             >
               <PlusIcon />
-              <Text style={styles.topUpText} allowFontScaling={false}>
+              <Text className="font-inter-semibold text-body leading-[21px] text-white" allowFontScaling={false}>
                 Top Up Wallet
               </Text>
             </Pressable>
@@ -566,7 +575,7 @@ export default function HomeScreen() {
         </View>
 
         {/* ── Quick actions ─────────────────────────────────────────────── */}
-        <View style={styles.quickActions}>
+        <View className="flex-row justify-between px-xl mt-xl">
           {[
             {
               label: 'Send',
@@ -595,22 +604,19 @@ export default function HomeScreen() {
           ].map(action => (
             <Pressable
               key={action.label}
-              style={styles.actionBtn}
-              className="active:opacity-pressed"
+              className="flex-1 items-center gap-sm active:opacity-pressed"
               accessibilityLabel={action.label}
             >
               <View
+                className="w-[56px] h-[56px] rounded-[18px] border items-center justify-center"
                 style={[
                   styles.actionIconWrap,
-                  {
-                    backgroundColor: action.iconBg,
-                    borderColor: action.borderColor,
-                  },
+                  { backgroundColor: action.iconBg, borderColor: action.borderColor },
                 ]}
               >
                 {action.icon}
               </View>
-              <Text style={styles.actionLabel} allowFontScaling={false}>
+              <Text className="font-inter-medium text-small leading-[18px] text-[#374151]" allowFontScaling={false}>
                 {action.label}
               </Text>
             </Pressable>
@@ -618,7 +624,7 @@ export default function HomeScreen() {
         </View>
 
         {/* ── Promo carousel ───────────────────────────────────────────── */}
-        <View style={styles.promoSection}>
+        <View className="mt-xl gap-[10px]">
           <FlatList
             ref={promoRef}
             data={PROMO_CARDS}
@@ -627,46 +633,44 @@ export default function HomeScreen() {
             showsHorizontalScrollIndicator={false}
             snapToInterval={SCREEN_WIDTH - 48 + 12}
             decelerationRate="fast"
-            contentContainerStyle={styles.promoList}
+            contentContainerStyle={{ paddingHorizontal: 24, gap: 12 }}
             keyExtractor={item => item.id}
             renderItem={({ item }) => <PromoCarouselCard card={item} />}
             onViewableItemsChanged={onPromoViewableChanged}
             viewabilityConfig={{ itemVisiblePercentThreshold: 50 }}
           />
           {/* Dots */}
-          <View style={styles.promoDots}>
+          <View className="flex-row justify-center gap-[5px]">
             {PROMO_CARDS.map((_, i) => (
               <View
                 key={i}
-                style={[
-                  styles.promoDot,
-                  i === activePromo
-                    ? styles.promoDotActive
-                    : styles.promoDotInactive,
-                ]}
+                className="h-[6px] rounded-full"
+                style={{
+                  width: i === activePromo ? 16 : 6,
+                  backgroundColor: i === activePromo ? '#2563EB' : '#D1D5DB',
+                }}
               />
             ))}
           </View>
         </View>
 
         {/* ── Recent transactions ──────────────────────────────────────── */}
-        <View style={styles.section}>
-          <View style={styles.sectionHeader}>
-            <Text style={styles.sectionTitle} allowFontScaling={false}>
+        <View className="px-xl mt-xl gap-[14px]">
+          <View className="flex-row items-center justify-between">
+            <Text className="font-jakarta-bold text-h4 leading-[24px] text-[#111827] dark:text-neutral-50" allowFontScaling={false}>
               Recent Transactions
             </Text>
             <Pressable
-              style={styles.seeAllBtn}
-              className="active:opacity-pressed"
+              className="flex-row items-center gap-[2px] active:opacity-pressed"
               accessibilityLabel="See all transactions"
             >
-              <Text style={styles.seeAllText} allowFontScaling={false}>
+              <Text className="font-inter-medium text-[13px] leading-[19.5px] text-info-600" allowFontScaling={false}>
                 See All
               </Text>
               <ArrowRightSmallIcon />
             </Pressable>
           </View>
-          <View style={styles.txCard}>
+          <View className="bg-white dark:bg-neutral-800 border border-[#E5E7EB] dark:border-neutral-700 rounded-lg overflow-hidden">
             {TRANSACTIONS.map((tx, i) => (
               <TransactionRow
                 key={tx.id}
@@ -678,42 +682,39 @@ export default function HomeScreen() {
         </View>
 
         {/* ── Weekly spending ──────────────────────────────────────────── */}
-        <View style={styles.section}>
-          <View style={styles.spendCard}>
-            <View style={styles.spendHeader}>
+        <View className="px-xl mt-xl gap-[14px]">
+          <View className="bg-white dark:bg-neutral-800 border border-[#E5E7EB] dark:border-neutral-700 rounded-lg p-[17px] gap-xs">
+            <View className="flex-row items-start justify-between mb-sm">
               <View>
-                <Text style={styles.spendTitle} allowFontScaling={false}>
+                <Text className="font-jakarta-bold text-[15px] text-[#111827] dark:text-neutral-50 leading-[22.5px]" allowFontScaling={false}>
                   Weekly Spending
                 </Text>
-                <Text style={styles.spendSubtitle} allowFontScaling={false}>
+                <Text className="font-inter-regular text-small leading-[18px] text-[#6B7280] dark:text-neutral-400 mt-xxs" allowFontScaling={false}>
                   $755.49 spent this week
                 </Text>
               </View>
-              <View style={styles.weekBadge}>
-                <Text style={styles.weekBadgeText} allowFontScaling={false}>
+              <View className="bg-info-50 rounded-full px-[10px] h-[32px] items-center justify-center">
+                <Text className="font-inter-semibold text-caption leading-[16.5px] text-info-600" allowFontScaling={false}>
                   This Week
                 </Text>
               </View>
             </View>
 
             {/* Bar chart */}
-            <View style={styles.chartWrap}>
+            <View className="flex-row h-[80px] gap-xs items-end pt-sm">
               {WEEKLY_DATA.map(item => (
-                <View key={item.day} style={styles.barCol}>
-                  <View style={styles.barTrack}>
+                <View key={item.day} className="flex-1 items-center gap-xs h-full">
+                  <View className="flex-1 w-[80%] justify-end">
                     <View
-                      style={[
-                        styles.bar,
-                        {
-                          height: `${item.height * 100}%` as any,
-                          backgroundColor: item.isToday
-                            ? '#2563EB'
-                            : '#DBEAFE',
-                        },
-                      ]}
+                      className="w-full rounded-xs"
+                      style={{
+                        minHeight: 4,
+                        height: `${item.height * 100}%` as any,
+                        backgroundColor: item.isToday ? '#2563EB' : '#DBEAFE',
+                      }}
                     />
                   </View>
-                  <Text style={styles.barLabel} allowFontScaling={false}>
+                  <Text className="font-inter-regular text-caption leading-[16px] text-[#9CA3AF] dark:text-neutral-500" allowFontScaling={false}>
                     {item.day}
                   </Text>
                 </View>
@@ -721,16 +722,16 @@ export default function HomeScreen() {
             </View>
 
             {/* Legend */}
-            <View style={styles.legend}>
-              <View style={styles.legendItem}>
-                <View style={[styles.legendDot, { backgroundColor: '#2563EB' }]} />
-                <Text style={styles.legendText} allowFontScaling={false}>
+            <View className="flex-row gap-base justify-end mt-sm">
+              <View className="flex-row items-center gap-[5px]">
+                <View className="w-[10px] h-[10px] rounded-[3px]" style={{ backgroundColor: '#2563EB' }} />
+                <Text className="font-inter-regular text-caption leading-[16.5px] text-[#6B7280] dark:text-neutral-400" allowFontScaling={false}>
                   Today
                 </Text>
               </View>
-              <View style={styles.legendItem}>
-                <View style={[styles.legendDot, { backgroundColor: '#DBEAFE' }]} />
-                <Text style={styles.legendText} allowFontScaling={false}>
+              <View className="flex-row items-center gap-[5px]">
+                <View className="w-[10px] h-[10px] rounded-[3px]" style={{ backgroundColor: '#DBEAFE' }} />
+                <Text className="font-inter-regular text-caption leading-[16.5px] text-[#6B7280] dark:text-neutral-400" allowFontScaling={false}>
                   Past days
                 </Text>
               </View>
@@ -738,470 +739,27 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        <View style={styles.bottomPad} />
+        <View className="h-sm" />
       </ScrollView>
     </ScreenWrapper>
   );
 }
 
-// ── Styles ────────────────────────────────────────────────────────────────────
-
-const CARD_WIDTH = SCREEN_WIDTH - 48;
+// ── Styles — shadows only (not supported by NativeWind on React Native) ────────
 
 const styles = StyleSheet.create({
-  scrollContent: {
-    paddingBottom: 16,
-  },
-  // Header
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 24,
-    paddingTop: 10,
-    paddingBottom: 4,
-    height: 64,
-  },
-  avatar: {
-    width: 44,
-    height: 44,
-    borderRadius: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-    // Gradient via background (approximated)
-    backgroundColor: '#2563EB',
-  },
-  avatarText: {
-    fontFamily: 'PlusJakartaSans-Bold',
-    fontSize: 15,
-    color: '#FFFFFF',
-  },
-  greetingBlock: {
-    flex: 1,
-    marginLeft: 12,
-  },
-  greetingHi: {
-    fontFamily: 'Inter24pt-Regular',
-    fontSize: 12,
-    color: '#6B7280',
-    lineHeight: 18,
-  },
-  greetingName: {
-    fontFamily: 'PlusJakartaSans-Bold',
-    fontSize: 17,
-    color: '#111827',
-    lineHeight: 25.5,
-    marginTop: -2,
-  },
-  headerActions: {
-    flexDirection: 'row',
-    gap: 8,
-  },
-  headerBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'relative',
-  },
-  notifDot: {
-    position: 'absolute',
-    top: 9,
-    right: 9,
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: '#EF4444',
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
-  },
-  // Balance card
-  balanceCardWrap: {
-    paddingHorizontal: 24,
-    marginTop: 12,
-  },
   balanceCard: {
-    borderRadius: 24,
-    padding: 24,
-    overflow: 'hidden',
-    backgroundColor: '#2563EB',
     shadowColor: '#2563EB',
     shadowOpacity: 0.32,
     shadowRadius: 40,
     shadowOffset: { width: 0, height: 16 },
     elevation: 12,
   },
-  deco1: {
-    position: 'absolute',
-    width: 168,
-    height: 168,
-    borderRadius: 84,
-    backgroundColor: 'rgba(255,255,255,0.06)',
-    top: -48,
-    right: 14,
-  },
-  deco2: {
-    position: 'absolute',
-    width: 112,
-    height: 112,
-    borderRadius: 56,
-    backgroundColor: 'rgba(255,255,255,0.04)',
-    bottom: -14,
-    left: -28,
-  },
-  balanceTopRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  balanceLabel: {
-    fontFamily: 'Inter24pt-Medium',
-    fontSize: 13,
-    color: 'rgba(255,255,255,0.72)',
-    lineHeight: 19.5,
-  },
-  balanceAmount: {
-    fontFamily: 'PlusJakartaSans-Bold',
-    fontSize: 38,
-    color: '#FFFFFF',
-    lineHeight: 42,
-    letterSpacing: -0.5,
-    marginTop: 16,
-  },
-  changeRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-    marginTop: 16,
-  },
-  changeBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    backgroundColor: 'rgba(16,185,129,0.22)',
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    height: 24,
-  },
-  changeText: {
-    fontFamily: 'Inter24pt-SemiBold',
-    fontSize: 11,
-    color: '#34D399',
-    lineHeight: 16.5,
-  },
-  changeVs: {
-    fontFamily: 'Inter24pt-Regular',
-    fontSize: 11,
-    color: 'rgba(255,255,255,0.5)',
-    lineHeight: 16.5,
-  },
-  topUpBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 42,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.28)',
-    backgroundColor: 'rgba(255,255,255,0.16)',
-    marginTop: 24,
-    gap: 8,
-  },
-  topUpText: {
-    fontFamily: 'Inter24pt-SemiBold',
-    fontSize: 14,
-    color: '#FFFFFF',
-    lineHeight: 21,
-  },
-  // Quick actions
-  quickActions: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 24,
-    marginTop: 24,
-  },
-  actionBtn: {
-    flex: 1,
-    alignItems: 'center',
-    gap: 8,
-  },
   actionIconWrap: {
-    width: 56,
-    height: 56,
-    borderRadius: 18,
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     shadowColor: '#000',
     shadowOpacity: 0.06,
     shadowRadius: 8,
     shadowOffset: { width: 0, height: 2 },
     elevation: 2,
-  },
-  actionLabel: {
-    fontFamily: 'Inter24pt-Medium',
-    fontSize: 12,
-    color: '#374151',
-    lineHeight: 18,
-  },
-  // Promo carousel
-  promoSection: {
-    marginTop: 24,
-    gap: 10,
-  },
-  promoList: {
-    paddingHorizontal: 24,
-    gap: 12,
-  },
-  promoCard: {
-    width: CARD_WIDTH,
-    height: 127,
-    borderRadius: 18,
-    padding: 18,
-    overflow: 'hidden',
-    justifyContent: 'space-between',
-  },
-  promoCircle: {
-    position: 'absolute',
-    width: 88,
-    height: 88,
-    borderRadius: 44,
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    top: -24,
-    right: 16,
-  },
-  promoBadge: {
-    backgroundColor: 'rgba(255,255,255,0.22)',
-    borderRadius: 20,
-    paddingHorizontal: 9,
-    height: 21,
-    alignSelf: 'flex-start',
-    justifyContent: 'center',
-  },
-  promoBadgeText: {
-    fontFamily: 'Inter24pt-SemiBold',
-    fontSize: 10,
-    color: '#FFFFFF',
-    lineHeight: 15,
-  },
-  promoBottom: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    justifyContent: 'space-between',
-  },
-  promoTextWrap: {
-    flex: 1,
-    gap: 4,
-  },
-  promoTitle: {
-    fontFamily: 'PlusJakartaSans-Bold',
-    fontSize: 19,
-    color: '#FFFFFF',
-    lineHeight: 22.8,
-  },
-  promoSubtitle: {
-    fontFamily: 'Inter24pt-Regular',
-    fontSize: 12,
-    color: 'rgba(255,255,255,0.78)',
-    lineHeight: 16.8,
-    maxWidth: 148,
-  },
-  promoDots: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 5,
-  },
-  promoDot: {
-    height: 6,
-    borderRadius: 3,
-  },
-  promoDotActive: {
-    width: 16,
-    backgroundColor: '#2563EB',
-  },
-  promoDotInactive: {
-    width: 6,
-    backgroundColor: '#D1D5DB',
-  },
-  // Section
-  section: {
-    paddingHorizontal: 24,
-    marginTop: 24,
-    gap: 14,
-  },
-  sectionHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  sectionTitle: {
-    fontFamily: 'PlusJakartaSans-Bold',
-    fontSize: 16,
-    color: '#111827',
-    lineHeight: 24,
-  },
-  seeAllBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 2,
-  },
-  seeAllText: {
-    fontFamily: 'Inter24pt-Medium',
-    fontSize: 13,
-    color: '#2563EB',
-    lineHeight: 19.5,
-  },
-  // Transactions card
-  txCard: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    borderRadius: 16,
-    overflow: 'hidden',
-  },
-  txRowWrap: {
-    position: 'relative',
-  },
-  txRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    gap: 12,
-    height: 72,
-  },
-  txIconWrap: {
-    width: 44,
-    height: 44,
-    borderRadius: 14,
-    alignItems: 'center',
-    justifyContent: 'center',
-    flexShrink: 0,
-  },
-  txInfo: {
-    flex: 1,
-    gap: 2,
-  },
-  txTitle: {
-    fontFamily: 'Inter24pt-SemiBold',
-    fontSize: 14,
-    color: '#111827',
-    lineHeight: 21,
-  },
-  txSubtitle: {
-    fontFamily: 'Inter24pt-Regular',
-    fontSize: 12,
-    color: '#9CA3AF',
-    lineHeight: 18,
-  },
-  txAmount: {
-    fontFamily: 'PlusJakartaSans-Bold',
-    fontSize: 15,
-    lineHeight: 22.5,
-  },
-  txDivider: {
-    height: 1,
-    backgroundColor: '#F3F4F6',
-    marginLeft: 72,
-  },
-  // Weekly spending
-  spendCard: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
-    borderRadius: 16,
-    padding: 17,
-    gap: 4,
-  },
-  spendHeader: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
-    marginBottom: 8,
-  },
-  spendTitle: {
-    fontFamily: 'PlusJakartaSans-Bold',
-    fontSize: 15,
-    color: '#111827',
-    lineHeight: 22.5,
-  },
-  spendSubtitle: {
-    fontFamily: 'Inter24pt-Regular',
-    fontSize: 12,
-    color: '#6B7280',
-    lineHeight: 18,
-    marginTop: 2,
-  },
-  weekBadge: {
-    backgroundColor: '#EFF6FF',
-    borderRadius: 20,
-    paddingHorizontal: 10,
-    height: 32,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  weekBadgeText: {
-    fontFamily: 'Inter24pt-SemiBold',
-    fontSize: 11,
-    color: '#2563EB',
-    lineHeight: 16.5,
-  },
-  // Bar chart
-  chartWrap: {
-    flexDirection: 'row',
-    height: 80,
-    gap: 4,
-    alignItems: 'flex-end',
-    paddingTop: 8,
-  },
-  barCol: {
-    flex: 1,
-    alignItems: 'center',
-    gap: 4,
-    height: '100%',
-  },
-  barTrack: {
-    flex: 1,
-    width: '80%',
-    justifyContent: 'flex-end',
-  },
-  bar: {
-    width: '100%',
-    borderRadius: 4,
-    minHeight: 4,
-  },
-  barLabel: {
-    fontFamily: 'Inter24pt-Regular',
-    fontSize: 11,
-    color: '#9CA3AF',
-    lineHeight: 16,
-  },
-  // Legend
-  legend: {
-    flexDirection: 'row',
-    gap: 16,
-    justifyContent: 'flex-end',
-    marginTop: 8,
-  },
-  legendItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 5,
-  },
-  legendDot: {
-    width: 10,
-    height: 10,
-    borderRadius: 3,
-  },
-  legendText: {
-    fontFamily: 'Inter24pt-Regular',
-    fontSize: 11,
-    color: '#6B7280',
-    lineHeight: 16.5,
-  },
-  bottomPad: {
-    height: 8,
   },
 });

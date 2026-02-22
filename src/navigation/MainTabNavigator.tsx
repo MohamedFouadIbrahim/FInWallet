@@ -226,7 +226,7 @@ const styles = StyleSheet.create({
     shadowRadius: 20,
     shadowOffset: { width: 0, height: -4 },
     elevation: 8,
-    alignItems: 'center',
+    alignItems: 'flex-start',
     height: 76,
   },
   tabItem: {

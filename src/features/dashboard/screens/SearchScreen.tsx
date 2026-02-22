@@ -10,6 +10,8 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import Svg, { Circle, Path } from 'react-native-svg';
 
+import ScreenWrapper from '@components/layout/ScreenWrapper';
+
 // ── Icons ─────────────────────────────────────────────────────────────────────
 
 const SearchIcon = () => (
@@ -236,7 +238,7 @@ export default function SearchScreen() {
   const hasQuery = query.trim().length > 0;
 
   return (
-    <View style={styles.root}>
+    <ScreenWrapper edges={['top', 'left', 'right']}>
       {/* ── Search bar ───────────────────────────────────────────────── */}
       <View style={styles.searchBar}>
         <View style={styles.inputWrap}>
@@ -410,17 +412,13 @@ export default function SearchScreen() {
           </View>
         </ScrollView>
       )}
-    </View>
+    </ScreenWrapper>
   );
 }
 
 // ── Styles ────────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: '#FFFFFF',
-  },
   // Search bar row
   searchBar: {
     flexDirection: 'row',
