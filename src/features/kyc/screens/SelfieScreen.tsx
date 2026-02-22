@@ -180,7 +180,7 @@ export default function SelfieScreen({ navigation }: Props) {
             {selfieDetected ? (
               <AppButton
                 label="Continue"
-                onPress={() => console.log('KYC complete — navigate to main app')}
+                onPress={() => navigation.navigate('ChooseTier')}
               />
             ) : (
               <AppButton
