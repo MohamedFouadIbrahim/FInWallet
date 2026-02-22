@@ -114,6 +114,22 @@ Font `.ttf` files and image `.png` files must be placed manually:
 
 After placing fonts, run `npx react-native-asset` to link them to native projects, then rebuild.
 
+## UI Implementation Rules
+
+- **Always use `AppButton`** (`src/components/ui/AppButton.tsx`) for primary and secondary CTA buttons — never a raw `Pressable` with custom button styles
+- **Styling approach — hybrid**:
+  - NativeWind `className` for layout, spacing, color, and typography utilities
+  - `StyleSheet.create` only for shadows, complex transforms, exact pixel values not covered by design tokens, and dynamic/computed inline styles
+- **Before implementing any screen**:
+  - check `src/components/ui/` for existing components to reuse
+  - if you find any Ui created before and you want to create it create it in the components folder and use it and replace the old one
+- **Use design tokens** from `tailwind.config.js` instead of hardcoded pixel values where possible:
+  - Spacing: `px-xl` (24px), `pb-3xl` (40px), `gap-sm` (8px), `gap-md` (12px)
+  - Heights: `h-btn` (52px), `h-header` (56px)
+  - Border radius: `rounded-md` (12px), `rounded-lg` (16px)
+  - Typography: `font-jakarta-bold`, `font-inter-semibold`, `font-inter-regular`, `font-inter-medium`
+  - Colors: `bg-neutral-100` (#F3F4F6), `text-neutral-500` (#6B7280), `text-neutral-900` (#111827)
+
 ## Key Dependencies
 
 | Package | Version | Purpose |

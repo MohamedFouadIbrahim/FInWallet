@@ -18,13 +18,11 @@ type Props = NativeStackScreenProps<AuthStackParamList, 'EnableBiometrics'>;
 
 export default function BiometricLoginScreen({ navigation }: Props) {
   const handleEnable = () => {
-    // TODO: Trigger native biometric registration, then navigate to main app
-    console.log('Enable biometrics');
+    navigation.getParent()?.navigate('KYC');
   };
 
   const handleSkip = () => {
-    // TODO: Navigate to main app dashboard
-    console.log('Skip biometrics');
+    navigation.getParent()?.navigate('KYC');
   };
 
   return (

@@ -3,6 +3,7 @@ import {
   Pressable,
   StyleSheet,
   Text,
+  View,
   type StyleProp,
   type ViewStyle,
 } from 'react-native';
@@ -16,6 +17,8 @@ interface Props {
   disabled?: boolean;
   accessibilityLabel?: string;
   style?: StyleProp<ViewStyle>;
+  /** Optional icon rendered to the left of the label */
+  leftIcon?: React.ReactNode;
 }
 
 export default function AppButton({
@@ -25,6 +28,7 @@ export default function AppButton({
   disabled = false,
   accessibilityLabel,
   style,
+  leftIcon,
 }: Props) {
   const { isDark } = useTheme();
 
@@ -44,17 +48,20 @@ export default function AppButton({
       disabled={disabled}
       accessibilityLabel={accessibilityLabel ?? label}
     >
-      <Text
-        className={
-          variant === 'primary'
-            ? 'text-white font-inter-semibold'
-            : 'text-neutral-900 dark:text-neutral-50 font-inter-semibold'
-        }
-        style={styles.text}
-        allowFontScaling={false}
-      >
-        {label}
-      </Text>
+      <View className="flex-row items-center justify-center gap-2">
+        {leftIcon}
+        <Text
+          className={
+            variant === 'primary'
+              ? 'text-white font-inter-semibold'
+              : 'text-neutral-900 dark:text-neutral-50 font-inter-semibold'
+          }
+          style={styles.text}
+          allowFontScaling={false}
+        >
+          {label}
+        </Text>
+      </View>
     </Pressable>
   );
 }
