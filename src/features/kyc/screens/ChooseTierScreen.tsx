@@ -8,6 +8,8 @@ import ScreenWrapper from '@components/layout/ScreenWrapper';
 import ArrowLeftIcon from '@components/ui/icons/ArrowLeftIcon';
 import CrownIcon from '@components/ui/icons/CrownIcon';
 import type { KYCStackParamList } from '@features/kyc/navigation/KYCNavigator';
+import type { RootStackParamList } from '../../../navigation/RootNavigator';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 type Props = NativeStackScreenProps<KYCStackParamList, 'ChooseTier'>;
 type TierKey = 'basic' | 'intermediate' | 'full';
@@ -399,7 +401,10 @@ export default function ChooseTierScreen({ navigation }: Props) {
           <View style={styles.continueWrapper}>
             <AppButton
               label={activeTier.buttonLabel}
-              onPress={() => console.log('KYC tier selected:', selected)}
+              onPress={() => {
+                const rootNav = navigation.getParent<NativeStackNavigationProp<RootStackParamList>>();
+                rootNav?.navigate('Main');
+              }}
             />
           </View>
         </View>
