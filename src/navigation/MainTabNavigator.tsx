@@ -14,6 +14,9 @@ import Svg, { Path, Rect, Circle } from 'react-native-svg';
 
 import DashboardNavigator from '@features/dashboard/navigation/DashboardNavigator';
 import WalletOverviewScreen from '@features/wallet/screens/WalletOverviewScreen';
+import AnalyticsScreen from '@features/analytics/screens/AnalyticsScreen';
+import ProfileScreen from '@features/profile/screens/ProfileScreen';
+import QRScannerScreen from '@features/receive/screens/QRScannerScreen';
 
 // ── Placeholder screens ───────────────────────────────────────────────────────
 
@@ -207,9 +210,9 @@ export default function MainTabNavigator() {
     >
       <Tab.Screen name="Home" component={DashboardNavigator} />
       <Tab.Screen name="Wallet" component={WalletOverviewScreen} />
-      <Tab.Screen name="Scan" component={PlaceholderScreen} />
-      <Tab.Screen name="Analytics" component={PlaceholderScreen} />
-      <Tab.Screen name="Profile" component={PlaceholderScreen} />
+      <Tab.Screen name="Scan" component={QRScannerScreen} />
+      <Tab.Screen name="Analytics" component={AnalyticsScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
 }
