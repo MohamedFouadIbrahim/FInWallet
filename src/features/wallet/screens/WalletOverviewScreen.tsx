@@ -441,13 +441,15 @@ const WalletOverviewScreen = () => {
             <View style={styles.balanceCircle1} />
             <View style={styles.balanceCircle2} />
 
-            <Text style={styles.balanceLabel} allowFontScaling={false}>
-              Total Balance (USD equiv.)
-            </Text>
-
-            <Text style={styles.balanceAmount} allowFontScaling={false}>
-              $18,710.75
-            </Text>
+          <View style={{ flex:1, justifyContent:'space-between', padding: 20}} >
+            <View>
+              <Text style={styles.balanceLabel} allowFontScaling={false}>
+                Total Balance (USD equiv.)
+              </Text>
+              <Text style={styles.balanceAmount} allowFontScaling={false}>
+                $18,710.75
+              </Text>
+            </View>
 
             {/* Footer: trend badge + today + dots */}
             <View style={styles.balanceFooter}>
@@ -470,6 +472,7 @@ const WalletOverviewScreen = () => {
                   />
                 ))}
               </View>
+            </View>
             </View>
           </LinearGradient>
         </View>
@@ -677,10 +680,11 @@ const styles = StyleSheet.create({
   balanceCard: {
     borderRadius: 20,
     overflow: 'hidden',
-    height: 182,
-    paddingHorizontal: 22,
-    paddingTop: 20,
-    paddingBottom: 20,
+    height: 200,
+    // paddingHorizontal: 22,
+    // paddingTop: 20,
+    // paddingBottom: 20,
+    // justifyContent: 'space-between',
   },
   // Decorative overlay circles — position:absolute is acceptable for purely visual elements
   balanceCircle1: {
@@ -709,7 +713,7 @@ const styles = StyleSheet.create({
     color: 'rgba(255,255,255,0.55)',
   },
   balanceAmount: {
-    marginTop: 30, // 68(figma top) - 20(paddingTop) - 18(label height) = 30
+    marginTop: 30,
     fontFamily: 'PlusJakartaSans-ExtraBold',
     fontSize: 34,
     lineHeight: 37.4,
@@ -717,7 +721,6 @@ const styles = StyleSheet.create({
     letterSpacing: -0.5,
   },
   balanceFooter: {
-    marginTop: 34, // 139.4(figma top) - 68(amount top) - 37.4(amount height) = 34
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
