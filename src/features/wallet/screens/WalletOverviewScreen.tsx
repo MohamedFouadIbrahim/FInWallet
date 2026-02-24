@@ -11,9 +11,12 @@ import {
   type ViewStyle,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
+import { useNavigation } from '@react-navigation/native';
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import ScreenWrapper from '@components/layout/ScreenWrapper';
 import { useTheme } from '@theme/useTheme';
+import type { WalletStackParamList } from '../navigation/WalletNavigator';
 import ChevronRightIcon from '@components/ui/icons/ChevronRightIcon';
 import TrendingUpIcon from '@components/ui/icons/TrendingUpIcon';
 import SendArrowIcon from '@components/ui/icons/SendArrowIcon';
@@ -377,6 +380,7 @@ const TransactionRow = React.memo(({ txn, isLast, isDark }: TransactionRowProps)
 
 const WalletOverviewScreen = () => {
   const { isDark } = useTheme();
+  const navigation = useNavigation<NativeStackNavigationProp<WalletStackParamList>>();
   const [activeWalletIdx, setActiveWalletIdx] = useState(0);
 
   const handleWalletScroll = useCallback(
@@ -389,7 +393,7 @@ const WalletOverviewScreen = () => {
   );
 
   const handleSettings = useCallback(() => {}, []);
-  const handleTopUp = useCallback(() => {}, []);
+  const handleTopUp = useCallback(() => navigation.navigate('WalletTopUp'), [navigation]);
   const handleWithdraw = useCallback(() => {}, []);
   const handleExchange = useCallback(() => {}, []);
   const handleAddWallet = useCallback(() => {}, []);
