@@ -6,6 +6,7 @@ import TopUpAmountScreen from '@features/wallet/screens/TopUpAmountScreen';
 import TopUpSuccessScreen from '@features/wallet/screens/TopUpSuccessScreen';
 import WithdrawScreen from '@features/wallet/screens/WithdrawScreen';
 import WithdrawSuccessScreen from '@features/wallet/screens/WithdrawSuccessScreen';
+import ExchangeScreen from '@features/wallet/screens/ExchangeScreen';
 
 export type WalletStackParamList = {
   WalletOverview: undefined;
@@ -24,6 +25,7 @@ export type WalletStackParamList = {
     fee: string;
     timestamp: number;
   };
+  WalletExchange: undefined;
 };
 
 const Stack = createNativeStackNavigator<WalletStackParamList>();
@@ -37,6 +39,7 @@ export default function WalletNavigator() {
       <Stack.Screen name="WalletTopUpSuccess" component={TopUpSuccessScreen} />
       <Stack.Screen name="WalletWithdraw" component={WithdrawScreen} />
       <Stack.Screen name="WalletWithdrawSuccess" component={WithdrawSuccessScreen} />
+      <Stack.Screen name="WalletExchange" component={ExchangeScreen} />
     </Stack.Navigator>
   );
 }
