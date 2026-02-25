@@ -606,6 +606,7 @@ export default function HomeScreen() {
               key={action.label}
               className="flex-1 items-center gap-sm active:opacity-pressed"
               accessibilityLabel={action.label}
+              onPress={action.label === 'Send' ? () => navigation.navigate('SendMoney') : undefined}
             >
               <View
                 className="w-[56px] h-[56px] rounded-[18px] border items-center justify-center"
