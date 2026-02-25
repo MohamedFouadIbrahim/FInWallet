@@ -394,7 +394,7 @@ const WalletOverviewScreen = () => {
 
   const handleSettings = useCallback(() => {}, []);
   const handleTopUp = useCallback(() => navigation.navigate('WalletTopUp'), [navigation]);
-  const handleWithdraw = useCallback(() => {}, []);
+  const handleWithdraw = useCallback(() => navigation.navigate('WalletWithdraw'), [navigation]);
   const handleExchange = useCallback(() => {}, []);
   const handleAddWallet = useCallback(() => {}, []);
   const handleUpgrade = useCallback(() => {}, []);
