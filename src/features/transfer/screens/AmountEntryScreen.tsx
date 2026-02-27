@@ -9,7 +9,8 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
+import { DashboardStackParamList } from '@features/dashboard/navigation/DashboardNavigator';
 
 import ScreenWrapper from '@components/layout/ScreenWrapper';
 import AppButton from '@components/ui/AppButton';
@@ -22,11 +23,31 @@ const AVAILABLE_BALANCE = 12485.5;
 const QUICK_AMOUNTS_ROW1 = [50, 100, 250, 500];
 const QUICK_AMOUNT_ROW2 = 1000;
 
+// ── Mock wallet recipient lookup ──────────────────────────────────────────────
+
+const WALLET_RECIPIENTS: Record<string, { name: string; username: string; initials: string }> = {
+  '1': { name: 'Sarah Johnson', username: '@sarahj', initials: 'SJ' },
+  '2': { name: 'Michael Chen', username: '@mchen', initials: 'MC' },
+  '3': { name: 'Emma Williams', username: '@emmaw', initials: 'EW' },
+  '4': { name: 'David Brown', username: '@dbrown', initials: 'DB' },
+  '5': { name: 'Lisa Park', username: '@lisap', initials: 'LP' },
+  '6': { name: 'Omar Khalid', username: '@omark', initials: 'OK' },
+};
+
 // ── AmountEntryScreen ─────────────────────────────────────────────────────────
 
 export default function AmountEntryScreen() {
   const navigation = useNavigation<any>();
+  const route = useRoute<RouteProp<DashboardStackParamList, 'AmountEntry'>>();
   const { isDark } = useTheme();
+
+  const { recipientId, recipientName: paramName, recipientSubtitle, transferType, exchangeRate, currency } = route.params;
+
+  // Resolve display name + subtitle from params or wallet lookup
+  const walletRecipient = !paramName ? WALLET_RECIPIENTS[recipientId] : null;
+  const displayName = paramName ?? walletRecipient?.name ?? 'Recipient';
+  const displaySubtitle = recipientSubtitle ?? walletRecipient?.username ?? '';
+  const displayInitials = walletRecipient?.initials ?? displayName.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
   const inputRef = useRef<TextInput>(null);
   const [rawValue, setRawValue] = useState('');
 
@@ -50,10 +71,12 @@ export default function AmountEntryScreen() {
   const handleContinue = useCallback(() => {
     navigation.navigate('TransferReview', {
       amount: numericAmount,
-      recipientName: 'Sarah Johnson',
-      recipientUsername: '@sarahj',
+      recipientName: displayName,
+      recipientUsername: displaySubtitle,
+      exchangeRate,
+      currency,
     });
-  }, [navigation, numericAmount]);
+  }, [navigation, numericAmount, displayName, displaySubtitle]);
 
   const reviewLabel = isValid
     ? `Review Transfer · $${numericAmount.toFixed(2)}`
@@ -90,28 +113,28 @@ export default function AmountEntryScreen() {
               {/* Avatar */}
               <View style={styles.recipientAvatar}>
                 <Text style={styles.recipientInitials} allowFontScaling={false}>
-                  SJ
+                  {displayInitials}
                 </Text>
               </View>
-              {/* Name & username */}
+              {/* Name & subtitle */}
               <View className="flex-1 gap-[2px]">
                 <Text
                   className="font-inter-semibold text-[14px] leading-[21px] text-neutral-900 dark:text-neutral-50"
                   allowFontScaling={false}
                 >
-                  Sarah Johnson
+                  {displayName}
                 </Text>
                 <Text
                   className="font-inter-regular text-[12px] leading-[18px] text-[#9CA3AF]"
                   allowFontScaling={false}
                 >
-                  @sarahj
+                  {displaySubtitle}
                 </Text>
               </View>
-              {/* Instant badge */}
+              {/* Transfer type badge */}
               <View style={styles.instantBadge}>
                 <Text style={styles.instantBadgeText} allowFontScaling={false}>
-                  Instant
+                  {transferType === 'bank' ? 'Bank' : transferType === 'contact' ? 'Contact' : transferType === 'international' ? 'Intl' : 'Instant'}
                 </Text>
               </View>
             </View>

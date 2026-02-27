@@ -52,7 +52,7 @@ export default function PinConfirmScreen() {
   const route = useRoute<PinRoute>();
   const { isDark } = useTheme();
 
-  const { amount, recipientName, recipientUsername } = route.params;
+  const { amount, recipientName, recipientUsername, exchangeRate, currency } = route.params;
   const formattedAmount = `$${amount.toFixed(2)}`;
 
   const inputRef = useRef<TextInput>(null);
@@ -72,6 +72,8 @@ export default function PinConfirmScreen() {
             amount,
             recipientName,
             recipientUsername,
+            exchangeRate,
+            currency,
           });
         } else {
           setHasError(true);
@@ -80,7 +82,7 @@ export default function PinConfirmScreen() {
         }
       }
     },
-    [navigation, amount, recipientName, recipientUsername],
+    [navigation, amount, recipientName, recipientUsername, exchangeRate, currency],
   );
 
   const focusInput = useCallback(() => {

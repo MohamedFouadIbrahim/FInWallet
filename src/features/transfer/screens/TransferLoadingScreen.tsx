@@ -38,7 +38,7 @@ type LoadingRoute = RouteProp<DashboardStackParamList, 'TransferLoading'>;
 export default function TransferLoadingScreen() {
   const navigation = useNavigation<any>();
   const route = useRoute<LoadingRoute>();
-  const { amount, recipientName, recipientUsername } = route.params;
+  const { amount, recipientName, recipientUsername, exchangeRate, currency } = route.params;
 
   // Continuous rotation animation on the UI thread
   const rotation = useSharedValue(0);
@@ -58,10 +58,12 @@ export default function TransferLoadingScreen() {
         amount,
         recipientName,
         recipientUsername,
+        exchangeRate,
+        currency,
       });
     }, 2500);
     return () => clearTimeout(timer);
-  }, [navigation, amount, recipientName, recipientUsername]);
+  }, [navigation, amount, recipientName, recipientUsername, exchangeRate, currency]);
 
   const spinStyle = useAnimatedStyle(() => ({
     transform: [{ rotate: `${rotation.value}deg` }],

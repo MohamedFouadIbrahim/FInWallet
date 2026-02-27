@@ -87,7 +87,7 @@ export default function TransferReviewScreen() {
   const route = useRoute<ReviewRoute>();
   const { isDark } = useTheme();
 
-  const { amount, recipientName, recipientUsername } = route.params;
+  const { amount, recipientName, recipientUsername, exchangeRate, currency } = route.params;
 
   const formattedAmount = `$${amount.toFixed(2)}`;
   const initials = recipientName
@@ -101,8 +101,10 @@ export default function TransferReviewScreen() {
       amount,
       recipientName,
       recipientUsername,
+      exchangeRate,
+      currency,
     });
-  }, [navigation, amount, recipientName, recipientUsername]);
+  }, [navigation, amount, recipientName, recipientUsername, exchangeRate, currency]);
 
   return (
     <ScreenWrapper edges={['top', 'left', 'right']}>

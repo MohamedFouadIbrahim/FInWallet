@@ -4,6 +4,10 @@ import HomeScreen from '@features/dashboard/screens/HomeScreen';
 import SearchScreen from '@features/dashboard/screens/SearchScreen';
 import SendMoneyScreen from '@features/transfer/screens/SendMoneyScreen';
 import SendToWalletScreen from '@features/transfer/screens/SendToWalletScreen';
+import SendToBankScreen from '@features/transfer/screens/SendToBankScreen';
+import SendToContactScreen from '@features/transfer/screens/SendToContactScreen';
+import CountrySelectScreen from '@features/transfer/screens/CountrySelectScreen';
+import RecipientDetailsScreen from '@features/transfer/screens/RecipientDetailsScreen';
 import AmountEntryScreen from '@features/transfer/screens/AmountEntryScreen';
 import TransferReviewScreen from '@features/transfer/screens/TransferReviewScreen';
 import PinConfirmScreen from '@features/transfer/screens/PinConfirmScreen';
@@ -15,11 +19,30 @@ export type DashboardStackParamList = {
   Search: undefined;
   SendMoney: undefined;
   SendToWallet: undefined;
-  AmountEntry: { recipientId: string };
-  TransferReview: { amount: number; recipientName: string; recipientUsername: string };
-  PinConfirm: { amount: number; recipientName: string; recipientUsername: string };
-  TransferLoading: { amount: number; recipientName: string; recipientUsername: string };
-  TransferSuccess: { amount: number; recipientName: string; recipientUsername: string };
+  SendToBank: undefined;
+  SendToContact: undefined;
+  CountrySelect: undefined;
+  RecipientDetails: {
+    country: {
+      id: string;
+      flag: string;
+      name: string;
+      currency: string;
+      rate: string;
+    };
+  };
+  AmountEntry: {
+    recipientId: string;
+    recipientName?: string;
+    recipientSubtitle?: string;
+    transferType?: 'wallet' | 'bank' | 'contact' | 'international';
+    exchangeRate?: string;
+    currency?: string;
+  };
+  TransferReview: { amount: number; recipientName: string; recipientUsername: string; exchangeRate?: string; currency?: string };
+  PinConfirm: { amount: number; recipientName: string; recipientUsername: string; exchangeRate?: string; currency?: string };
+  TransferLoading: { amount: number; recipientName: string; recipientUsername: string; exchangeRate?: string; currency?: string };
+  TransferSuccess: { amount: number; recipientName: string; recipientUsername: string; exchangeRate?: string; currency?: string };
 };
 
 const Stack = createNativeStackNavigator<DashboardStackParamList>();
@@ -41,6 +64,26 @@ export default function DashboardNavigator() {
       <Stack.Screen
         name="SendToWallet"
         component={SendToWalletScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="SendToBank"
+        component={SendToBankScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="SendToContact"
+        component={SendToContactScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="CountrySelect"
+        component={CountrySelectScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="RecipientDetails"
+        component={RecipientDetailsScreen}
         options={{ animation: 'slide_from_right' }}
       />
       <Stack.Screen

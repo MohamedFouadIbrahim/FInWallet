@@ -17,7 +17,6 @@ import Animated, {
 } from 'react-native-reanimated';
 
 import ScreenWrapper from '@components/layout/ScreenWrapper';
-import AppButton from '@components/ui/AppButton';
 import { useTheme } from '@theme/useTheme';
 import { DashboardStackParamList } from '@features/dashboard/navigation/DashboardNavigator';
 
@@ -140,6 +139,25 @@ const DownloadIcon = () => (
   </Svg>
 );
 
+const HomeIcon = () => (
+  <Svg width={18} height={18} viewBox="0 0 18 18" fill="none">
+    <Path
+      d="M2.25 7.5L9 1.5L15.75 7.5V15.75C15.75 16.1478 15.592 16.5294 15.3107 16.8107C15.0294 17.092 14.6478 17.25 14.25 17.25H3.75C3.35218 17.25 2.97064 17.092 2.68934 16.8107C2.40804 16.5294 2.25 16.1478 2.25 15.75V7.5Z"
+      stroke="white"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M6.75 17.25V9.75H11.25V17.25"
+      stroke="white"
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 const generateTxnId = () => {
@@ -157,6 +175,13 @@ const formatDateTime = (date: Date) =>
   }) +
   ', ' +
   date.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+const CURRENCY_SYMBOLS: Record<string, string> = {
+  GBP: '£', EUR: '€', JPY: '¥', AED: 'د.إ',
+  CAD: 'CA$', AUD: 'A$', INR: '₹', PKR: '₨', SAR: '﷼',
+};
+
+const getCurrencySymbol = (code: string) => CURRENCY_SYMBOLS[code] ?? `${code} `;
 
 // ── Types ─────────────────────────────────────────────────────────────────────
 
@@ -196,15 +221,24 @@ export default function TransferSuccessScreen() {
   const route = useRoute<SuccessRoute>();
   const { isDark } = useTheme();
 
-  const { amount, recipientName } = route.params;
+  const { amount, recipientName, exchangeRate, currency } = route.params;
 
   const txnId = useRef(generateTxnId()).current;
   const txnDate = useRef(new Date()).current;
 
-  const transferFee = 0;
+  const isInternational = !!exchangeRate;
+  const transferFee = isInternational ? 5.45 : 0;
   const totalDeducted = amount + transferFee;
   const formattedAmount = `$${amount.toFixed(2)}`;
   const formattedTotal = `$${totalDeducted.toFixed(2)}`;
+
+  // Parse rate number from e.g. "1 USD = 0.783 GBP"
+  const rateMatch = exchangeRate?.match(/=\s*([\d.]+)/);
+  const rateNum = rateMatch ? parseFloat(rateMatch[1]) : 0;
+  const netAmount = amount - transferFee;
+  const amountReceivedStr = currency
+    ? `${getCurrencySymbol(currency)}${(netAmount * rateNum).toFixed(2)} ${currency}`
+    : '';
 
   // Entrance animations
   const iconScale = useSharedValue(0);
@@ -232,142 +266,165 @@ export default function TransferSuccessScreen() {
 
   return (
     <ScreenWrapper edges={['top', 'left', 'right']}>
-      <View style={[styles.bg, isDark && styles.bgDark]}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollContent}
-        >
-          {/* ── Hero ──────────────────────────────────────────────────── */}
-          <View style={styles.hero}>
-            <Animated.View style={[styles.checkContainer, iconStyle]}>
-              <CheckIcon />
-            </Animated.View>
-            <Text
-              style={[styles.heroTitle, isDark && styles.heroTitleDark]}
-              allowFontScaling={false}
-            >
-              Transfer Successful!
+      {/* ── Scrollable content ────────────────────────────────────────── */}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContent}
+      >
+        {/* ── Hero ──────────────────────────────────────────────────── */}
+        <View style={styles.hero}>
+          <Animated.View style={[styles.checkContainer, iconStyle]}>
+            <CheckIcon />
+          </Animated.View>
+          <Text
+            style={[styles.heroTitle, isDark && styles.heroTitleDark]}
+            allowFontScaling={false}
+          >
+            Transfer Successful!
+          </Text>
+          <Text style={styles.heroSubtitle} allowFontScaling={false}>
+            {formattedAmount} sent to {recipientName}
+          </Text>
+        </View>
+
+        {/* ── Receipt card ──────────────────────────────────────────── */}
+        <Animated.View style={[styles.card, isDark && styles.cardDark, cardStyle]}>
+          {/* Green header */}
+          <View style={styles.cardHeader}>
+            <Text style={styles.cardHeaderLabel} allowFontScaling={false}>
+              TRANSACTION RECEIPT
             </Text>
-            <Text style={styles.heroSubtitle} allowFontScaling={false}>
-              {formattedAmount} sent to {recipientName}
-            </Text>
+            <View style={styles.completedBadge}>
+              <Text style={styles.completedText} allowFontScaling={false}>
+                Completed
+              </Text>
+            </View>
           </View>
 
-          {/* ── Receipt card ──────────────────────────────────────────── */}
-          <Animated.View style={[styles.card, isDark && styles.cardDark, cardStyle]}>
-            {/* Green header */}
-            <View style={styles.cardHeader}>
-              <Text style={styles.cardHeaderLabel} allowFontScaling={false}>
-                TRANSACTION RECEIPT
-              </Text>
-              <View style={styles.completedBadge}>
-                <Text style={styles.completedText} allowFontScaling={false}>
-                  Completed
+          {/* Body */}
+          <View style={styles.cardBody}>
+            {/* Transaction ID */}
+            <View style={[styles.txnIdRow, isDark && styles.txnIdRowDark]}>
+              <View style={styles.txnIdLeft}>
+                <Text style={styles.txnIdLabel} allowFontScaling={false}>
+                  Transaction ID
+                </Text>
+                <Text
+                  style={[styles.txnIdValue, isDark && styles.txnIdValueDark]}
+                  allowFontScaling={false}
+                >
+                  {txnId}
                 </Text>
               </View>
+              <Pressable
+                style={styles.copyBtn}
+                accessibilityLabel="Copy transaction ID"
+                onPress={() => {}}
+              >
+                <CopyIcon />
+              </Pressable>
             </View>
 
-            {/* Body */}
-            <View style={styles.cardBody}>
-              {/* Transaction ID */}
-              <View style={[styles.txnIdRow, isDark && styles.txnIdRowDark]}>
-                <View style={styles.txnIdLeft}>
-                  <Text style={styles.txnIdLabel} allowFontScaling={false}>
-                    Transaction ID
-                  </Text>
-                  <Text
-                    style={[styles.txnIdValue, isDark && styles.txnIdValueDark]}
-                    allowFontScaling={false}
-                  >
-                    {txnId}
-                  </Text>
-                </View>
-                <Pressable
-                  style={styles.copyBtn}
-                  accessibilityLabel="Copy transaction ID"
-                  onPress={() => {}}
-                >
-                  <CopyIcon />
-                </Pressable>
-              </View>
-
-              {/* Data rows */}
-              <View style={styles.rows}>
+            {/* Data rows */}
+            <View style={styles.rows}>
+              <ReceiptRow
+                label="Date & Time"
+                value={formatDateTime(txnDate)}
+                isDark={isDark}
+              />
+              <ReceiptRow
+                label="Recipient"
+                value={recipientName}
+                isDark={isDark}
+              />
+              <ReceiptRow
+                label="Amount Sent"
+                value={formattedAmount}
+                isDark={isDark}
+              />
+              <ReceiptRow
+                label="Transfer Fee"
+                value={isInternational ? `$${transferFee.toFixed(2)}` : 'Free'}
+                valueStyle={isInternational ? undefined : styles.freeText}
+                isDark={isDark}
+              />
+              {isInternational && (
                 <ReceiptRow
-                  label="Date & Time"
-                  value={formatDateTime(txnDate)}
+                  label="Exchange Rate"
+                  value={exchangeRate!}
                   isDark={isDark}
                 />
+              )}
+              {isInternational && (
                 <ReceiptRow
-                  label="Recipient"
-                  value={recipientName}
+                  label="Amount Received"
+                  value={amountReceivedStr}
+                  valueStyle={styles.receivedText}
                   isDark={isDark}
                 />
-                <ReceiptRow
-                  label="Amount Sent"
-                  value={formattedAmount}
-                  isDark={isDark}
-                />
-                <ReceiptRow
-                  label="Transfer Fee"
-                  value="Free"
-                  valueStyle={styles.freeText}
-                  isDark={isDark}
-                />
-                <ReceiptRow
-                  label="Total Deducted"
-                  value={formattedTotal}
-                  valueStyle={styles.totalText}
-                  isDark={isDark}
-                />
-                <ReceiptRow
-                  label="Delivery"
-                  value="Instant"
-                  isLast
-                  isDark={isDark}
-                />
-              </View>
+              )}
+              <ReceiptRow
+                label="Total Deducted"
+                value={formattedTotal}
+                valueStyle={styles.totalText}
+                isDark={isDark}
+              />
+              <ReceiptRow
+                label="Delivery"
+                value={isInternational ? '1–3 business days' : 'Instant'}
+                isLast
+                isDark={isDark}
+              />
             </View>
-          </Animated.View>
-
-          {/* ── Action buttons ────────────────────────────────────────── */}
-          <View style={styles.actionRow}>
-            <Pressable
-              style={[styles.actionBtn, isDark && styles.actionBtnDark]}
-              accessibilityLabel="Share receipt"
-              onPress={() => {}}
-            >
-              <ShareIcon />
-              <Text
-                style={[styles.actionBtnText, isDark && styles.actionBtnTextDark]}
-                allowFontScaling={false}
-              >
-                Share
-              </Text>
-            </Pressable>
-            <Pressable
-              style={[styles.actionBtn, isDark && styles.actionBtnDark]}
-              accessibilityLabel="Download receipt"
-              onPress={() => {}}
-            >
-              <DownloadIcon />
-              <Text
-                style={[styles.actionBtnText, isDark && styles.actionBtnTextDark]}
-                allowFontScaling={false}
-              >
-                Download
-              </Text>
-            </Pressable>
           </View>
+        </Animated.View>
 
-          {/* ── Done ──────────────────────────────────────────────────── */}
-          <AppButton
-            label="Back to Home"
-            onPress={handleDone}
-          />
+        {/* ── Action buttons ────────────────────────────────────────── */}
+        <View style={styles.actionRow}>
+          <Pressable
+            style={[styles.actionBtn, isDark && styles.actionBtnDark]}
+            accessibilityLabel="Share receipt"
+            onPress={() => {}}
+          >
+            <ShareIcon />
+            <Text
+              style={[styles.actionBtnText, isDark && styles.actionBtnTextDark]}
+              allowFontScaling={false}
+            >
+              Share
+            </Text>
+          </Pressable>
+          <Pressable
+            style={[styles.actionBtn, isDark && styles.actionBtnDark]}
+            accessibilityLabel="Download receipt"
+            onPress={() => {}}
+          >
+            <DownloadIcon />
+            <Text
+              style={[styles.actionBtnText, isDark && styles.actionBtnTextDark]}
+              allowFontScaling={false}
+            >
+              Download
+            </Text>
+          </Pressable>
+        </View>
 
-          <View className="h-[24px]" />
-        </ScrollView>
+        <View className="h-[8px]" />
+      </ScrollView>
+
+      {/* ── Fixed footer ─────────────────────────────────────────────── */}
+      <View style={[styles.footer, isDark && styles.footerDark]}>
+        <Pressable
+          style={styles.dashboardBtn}
+          onPress={handleDone}
+          accessibilityLabel="Back to Dashboard"
+          accessibilityRole="button"
+        >
+          <HomeIcon />
+          <Text style={styles.dashboardBtnText} allowFontScaling={false}>
+            Back to Dashboard
+          </Text>
+        </Pressable>
       </View>
     </ScreenWrapper>
   );
@@ -376,25 +433,16 @@ export default function TransferSuccessScreen() {
 // ── Styles ────────────────────────────────────────────────────────────────────
 
 const styles = StyleSheet.create({
-  bg: {
-    flex: 1,
-    // backgroundColor: '#F9FAFB',
-  },
-  bgDark: {
-    // backgroundColor: '#0F172A',
-  },
   scrollContent: {
     paddingTop: 28,
     paddingHorizontal: 24,
     paddingBottom: 8,
-    gap: 0,
   },
 
   // Hero
   hero: {
     alignItems: 'center',
     marginBottom: 28,
-    gap: 0,
   },
   checkContainer: {
     width: 88,
@@ -550,6 +598,9 @@ const styles = StyleSheet.create({
   freeText: {
     color: '#059669',
   },
+  receivedText: {
+    color: '#059669',
+  },
   totalText: {
     fontFamily: 'PlusJakartaSans-Bold',
     fontSize: 15,
@@ -561,7 +612,7 @@ const styles = StyleSheet.create({
   actionRow: {
     flexDirection: 'row',
     gap: 10,
-    marginBottom: 14,
+    marginBottom: 0,
   },
   actionBtn: {
     flex: 1,
@@ -587,5 +638,35 @@ const styles = StyleSheet.create({
   },
   actionBtnTextDark: {
     color: '#D1D5DB',
+  },
+
+  // Fixed footer
+  footer: {
+    backgroundColor: '#FFFFFF',
+    borderTopWidth: 1,
+    borderTopColor: '#F3F4F6',
+    paddingTop: 17,
+    paddingHorizontal: 24,
+    paddingBottom: 10,
+  },
+  footerDark: {
+    backgroundColor: '#0F172A',
+    borderTopColor: '#1E293B',
+  },
+  dashboardBtn: {
+    height: 52,
+    borderRadius: 14,
+    backgroundColor: '#111827',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 10,
+  },
+  dashboardBtnText: {
+    fontFamily: 'Inter24pt-SemiBold',
+    fontSize: 16,
+    lineHeight: 22.857,
+    color: '#FFFFFF',
+    textAlign: 'center',
   },
 });
