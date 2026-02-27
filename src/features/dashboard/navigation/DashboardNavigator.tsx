@@ -13,11 +13,13 @@ import TransferReviewScreen from '@features/transfer/screens/TransferReviewScree
 import PinConfirmScreen from '@features/transfer/screens/PinConfirmScreen';
 import TransferLoadingScreen from '@features/transfer/screens/TransferLoadingScreen';
 import TransferSuccessScreen from '@features/transfer/screens/TransferSuccessScreen';
+import MyQRCodeScreen from '@features/receive/screens/MyQRCodeScreen';
 
 export type DashboardStackParamList = {
   HomeMain: undefined;
   Search: undefined;
   SendMoney: undefined;
+  ReceiveMoney: undefined;
   SendToWallet: undefined;
   SendToBank: undefined;
   SendToContact: undefined;
@@ -59,6 +61,11 @@ export default function DashboardNavigator() {
       <Stack.Screen
         name="SendMoney"
         component={SendMoneyScreen}
+        options={{ animation: 'slide_from_bottom' }}
+      />
+      <Stack.Screen
+        name="ReceiveMoney"
+        component={MyQRCodeScreen}
         options={{ animation: 'slide_from_bottom' }}
       />
       <Stack.Screen
