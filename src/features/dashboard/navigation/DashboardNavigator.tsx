@@ -14,10 +14,26 @@ import PinConfirmScreen from '@features/transfer/screens/PinConfirmScreen';
 import TransferLoadingScreen from '@features/transfer/screens/TransferLoadingScreen';
 import TransferSuccessScreen from '@features/transfer/screens/TransferSuccessScreen';
 import MyQRCodeScreen from '@features/receive/screens/MyQRCodeScreen';
+import NotificationsScreen from '@features/dashboard/screens/NotificationsScreen';
+import MyCardsScreen from '@features/cards/screens/MyCardsScreen';
+import CardControlsScreen from '@features/cards/screens/CardControlsScreen';
+import SpendingLimitsScreen from '@features/cards/screens/SpendingLimitsScreen';
+import PhysicalCardScreen from '@features/cards/screens/PhysicalCardScreen';
+import CardTransactionsScreen from '@features/cards/screens/CardTransactionsScreen';
+import CardPinScreen from '@features/cards/screens/CardPinScreen';
+import ViewPinScreen from '@features/cards/screens/ViewPinScreen';
 
 export type DashboardStackParamList = {
   HomeMain: undefined;
   Search: undefined;
+  Notifications: undefined;
+  MyCards: undefined;
+  CardControls: undefined;
+  SpendingLimits: undefined;
+  PhysicalCard: undefined;
+  CardTransactions: undefined;
+  CardPin: undefined;
+  ViewPin: undefined;
   SendMoney: undefined;
   ReceiveMoney: undefined;
   SendToWallet: undefined;
@@ -57,6 +73,46 @@ export default function DashboardNavigator() {
         name="Search"
         component={SearchScreen}
         options={{ animation: 'fade' }}
+      />
+      <Stack.Screen
+        name="Notifications"
+        component={NotificationsScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="MyCards"
+        component={MyCardsScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="CardControls"
+        component={CardControlsScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="SpendingLimits"
+        component={SpendingLimitsScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="PhysicalCard"
+        component={PhysicalCardScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="CardTransactions"
+        component={CardTransactionsScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="CardPin"
+        component={CardPinScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="ViewPin"
+        component={ViewPinScreen}
+        options={{ animation: 'slide_from_right' }}
       />
       <Stack.Screen
         name="SendMoney"

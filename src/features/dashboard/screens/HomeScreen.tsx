@@ -138,23 +138,11 @@ const QRActionIcon = () => (
   </Svg>
 );
 
-const BillsActionIcon = () => (
+const CardsActionIcon = () => (
   <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
-    <Path
-      d="M14 3V7H18"
-      stroke="#D97706"
-      strokeWidth={1.6}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <Path
-      d="M18 21H6C4.89543 21 4 20.1046 4 19V5C4 3.89543 4.89543 3 6 3H14L20 9V19C20 20.1046 19.1046 21 18 21Z"
-      stroke="#D97706"
-      strokeWidth={1.6}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-    <Path d="M9 13H15M9 17H12" stroke="#D97706" strokeWidth={1.6} strokeLinecap="round" />
+    <Rect x={2} y={5} width={20} height={14} rx={3} stroke="#D97706" strokeWidth={1.6} />
+    <Path d="M2 9H22" stroke="#D97706" strokeWidth={1.6} strokeLinecap="round" />
+    <Path d="M6 14H10" stroke="#D97706" strokeWidth={1.6} strokeLinecap="round" />
   </Svg>
 );
 
@@ -518,7 +506,7 @@ export default function HomeScreen() {
             </Pressable>
             <Pressable
               className="w-[40px] h-[40px] rounded-md bg-white dark:bg-neutral-800 border border-[#E5E7EB] dark:border-neutral-700 items-center justify-center relative"
-              onPress={() => {}}
+              onPress={() => navigation.navigate('Notifications')}
               accessibilityLabel="Notifications"
             >
               <BellIcon />
@@ -596,10 +584,10 @@ export default function HomeScreen() {
               icon: <QRActionIcon />,
             },
             {
-              label: 'Bills',
+              label: 'Cards',
               iconBg: '#FFFBEB',
               borderColor: 'rgba(245,158,11,0.1)',
-              icon: <BillsActionIcon />,
+              icon: <CardsActionIcon />,
             },
           ].map(action => (
             <Pressable
@@ -611,7 +599,9 @@ export default function HomeScreen() {
                   ? () => navigation.navigate('SendMoney')
                   : action.label === 'Receive'
                     ? () => navigation.navigate('ReceiveMoney')
-                    : undefined
+                    : action.label === 'Cards'
+                      ? () => navigation.navigate('MyCards')
+                      : undefined
               }
             >
               <View
