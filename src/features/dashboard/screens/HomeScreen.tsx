@@ -146,6 +146,34 @@ const CardsActionIcon = () => (
   </Svg>
 );
 
+const ChevronRightIcon = ({ color = '#9CA3AF' }: { color?: string }) => (
+  <Svg width={20} height={20} viewBox="0 0 20 20" fill="none">
+    <Path
+      d="M7.5 5L12.5 10L7.5 15"
+      stroke={color}
+      strokeWidth={1.5}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+
+const FileTextIcon = () => (
+  <Svg width={24} height={24} viewBox="0 0 24 24" fill="none">
+    <Path
+      d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z"
+      stroke="white"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <Path d="M14 2V8H20" stroke="white" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" />
+    <Path d="M16 13H8" stroke="white" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" />
+    <Path d="M16 17H8" stroke="white" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" />
+    <Path d="M10 9H8" stroke="white" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" />
+  </Svg>
+);
+
 const ArrowRightSmallIcon = ({ color = '#2563EB' }: { color?: string }) => (
   <Svg width={14} height={14} viewBox="0 0 14 14" fill="none">
     <Path
@@ -516,10 +544,9 @@ export default function HomeScreen() {
         </View>
 
         {/* ── Balance card ─────────────────────────────────────────────── */}
-        <View className="px-xl mt-md">
+        <View className="px-xl mt-md" style={styles.balanceCardShadow}>
           <View
             className="rounded-2xl p-xl overflow-hidden bg-info-600"
-            style={styles.balanceCard}
           >
             {/* Decorative circles */}
             <View className="absolute w-[168px] h-[168px] rounded-full bg-[rgba(255,255,255,0.06)] -top-[48px] right-[14px]" />
@@ -618,6 +645,34 @@ export default function HomeScreen() {
               </Text>
             </Pressable>
           ))}
+        </View>
+
+        {/* ── Pay Bills ────────────────────────────────────────────────── */}
+        <View className="px-xl mt-xl">
+          <Pressable
+            className="flex-row items-center bg-white dark:bg-neutral-800 border border-[#E5E7EB] dark:border-neutral-700 rounded-lg px-base gap-md h-[72px] active:opacity-pressed"
+            accessibilityLabel="Pay Bills"
+            onPress={() => navigation.navigate('PayBills')}
+          >
+            <View className="w-[48px] h-[48px] rounded-[14px] items-center justify-center bg-info-600 shrink-0">
+              <FileTextIcon />
+            </View>
+            <View className="flex-1 gap-[3px]">
+              <Text
+                className="font-inter-semibold text-body leading-[21px] text-[#111827] dark:text-neutral-50"
+                allowFontScaling={false}
+              >
+                Pay Bills
+              </Text>
+              <Text
+                className="font-inter-regular text-small leading-[18px] text-[#6B7280] dark:text-neutral-400"
+                allowFontScaling={false}
+              >
+                Electricity, water, internet & more
+              </Text>
+            </View>
+            <ChevronRightIcon />
+          </Pressable>
         </View>
 
         {/* ── Promo carousel ───────────────────────────────────────────── */}
@@ -745,7 +800,7 @@ export default function HomeScreen() {
 // ── Styles — shadows only (not supported by NativeWind on React Native) ────────
 
 const styles = StyleSheet.create({
-  balanceCard: {
+  balanceCardShadow: {
     shadowColor: '#2563EB',
     shadowOpacity: 0.32,
     shadowRadius: 40,

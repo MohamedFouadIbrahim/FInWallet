@@ -22,6 +22,8 @@ import PhysicalCardScreen from '@features/cards/screens/PhysicalCardScreen';
 import CardTransactionsScreen from '@features/cards/screens/CardTransactionsScreen';
 import CardPinScreen from '@features/cards/screens/CardPinScreen';
 import ViewPinScreen from '@features/cards/screens/ViewPinScreen';
+import PayBillsScreen from '@features/bills/screens/PayBillsScreen';
+import ProviderSelectScreen from '@features/bills/screens/ProviderSelectScreen';
 
 export type DashboardStackParamList = {
   HomeMain: undefined;
@@ -34,6 +36,8 @@ export type DashboardStackParamList = {
   CardTransactions: undefined;
   CardPin: undefined;
   ViewPin: undefined;
+  PayBills: undefined;
+  ProviderSelect: { categoryId: string; categoryName: string };
   SendMoney: undefined;
   ReceiveMoney: undefined;
   SendToWallet: undefined;
@@ -112,6 +116,16 @@ export default function DashboardNavigator() {
       <Stack.Screen
         name="ViewPin"
         component={ViewPinScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="PayBills"
+        component={PayBillsScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="ProviderSelect"
+        component={ProviderSelectScreen}
         options={{ animation: 'slide_from_right' }}
       />
       <Stack.Screen
