@@ -6,7 +6,8 @@ import {
   View,
   Pressable,
 } from 'react-native';
-import Svg, { Path, G } from 'react-native-svg';
+import Svg, { Circle, Path, G, Rect } from 'react-native-svg';
+import { useNavigation } from '@react-navigation/native';
 import ScreenWrapper from '@components/layout/ScreenWrapper';
 import { useTheme } from '@theme/useTheme';
 
@@ -66,6 +67,96 @@ const ChevronRightIcon = ({ color = '#2563EB' }: { color?: string }) => (
   </Svg>
 );
 
+const SpendingBreakdownIcon = () => (
+  <Svg width={20} height={20} viewBox="0 0 24 24" fill="none">
+    <Path
+      d="M12 2v10l6.93 4A10 10 0 1 1 12 2z"
+      stroke="#2563EB"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <Path
+      d="M12 2a10 10 0 0 1 8.66 5L12 12V2z"
+      stroke="#2563EB"
+      strokeWidth={1.8}
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+
+const MonthlyComparisonIcon = () => (
+  <Svg width={20} height={20} viewBox="0 0 24 24" fill="none">
+    <Path
+      d="M18 20V10"
+      stroke="#7C3AED"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+    />
+    <Path
+      d="M12 20V4"
+      stroke="#7C3AED"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+    />
+    <Path
+      d="M6 20v-6"
+      stroke="#7C3AED"
+      strokeWidth={1.8}
+      strokeLinecap="round"
+    />
+  </Svg>
+);
+
+const BudgetManagerIcon = () => (
+  <Svg width={20} height={20} viewBox="0 0 24 24" fill="none">
+    <Circle cx={12} cy={12} r={9} stroke="#059669" strokeWidth={1.8} />
+    <Circle cx={12} cy={12} r={5} stroke="#059669" strokeWidth={1.8} />
+    <Circle cx={12} cy={12} r={1.5} fill="#059669" />
+  </Svg>
+);
+
+const NavChevronIcon = () => (
+  <Svg width={16} height={16} viewBox="0 0 24 24" fill="none">
+    <Path
+      d="M9 18L15 12L9 6"
+      stroke="#9CA3AF"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </Svg>
+);
+
+// ── Nav items data ─────────────────────────────────────────────────────────────
+
+const NAV_ITEMS = [
+  {
+    id: 'breakdown',
+    icon: <SpendingBreakdownIcon />,
+    iconBg: '#EFF6FF',
+    title: 'Spending Analytics',
+    subtitle: 'Category donut chart & drill-down',
+    route: 'SpendingBreakdown' as const,
+  },
+  {
+    id: 'comparison',
+    icon: <MonthlyComparisonIcon />,
+    iconBg: '#F5F3FF',
+    title: 'Monthly Comparison',
+    subtitle: 'Compare spending month-over-month',
+    route: 'MonthlyComparison' as const,
+  },
+  {
+    id: 'budget',
+    icon: <BudgetManagerIcon />,
+    iconBg: '#F0FDF4',
+    title: 'Budget Manager',
+    subtitle: 'Set limits, alerts & auto-tracking',
+    route: 'BudgetManager' as const,
+  },
+];
+
 // ── Bar chart data ────────────────────────────────────────────────────────────
 
 const BAR_DATA = [
@@ -117,6 +208,48 @@ const CATEGORIES = [
     bgColor: '#F0FDF4',
   },
 ];
+
+// ── Nav item row ──────────────────────────────────────────────────────────────
+
+interface NavItemRowProps {
+  icon: React.ReactNode;
+  iconBg: string;
+  title: string;
+  subtitle: string;
+  onPress: () => void;
+  isDark: boolean;
+}
+
+const NavItemRow = ({ icon, iconBg, title, subtitle, onPress, isDark }: NavItemRowProps) => (
+  <Pressable
+    style={[
+      styles.navItemCard,
+      {
+        backgroundColor: isDark ? '#1E293B' : '#FFFFFF',
+        borderColor: isDark ? '#334155' : '#E5E7EB',
+      },
+    ]}
+    onPress={onPress}
+    accessibilityRole="button"
+  >
+    <View style={[styles.navItemIcon, { backgroundColor: iconBg }]}>{icon}</View>
+    <View style={styles.navItemContent}>
+      <Text
+        style={[styles.navItemTitle, { color: isDark ? '#F9FAFB' : '#111827' }]}
+        allowFontScaling={false}
+      >
+        {title}
+      </Text>
+      <Text
+        style={[styles.navItemSubtitle, { color: isDark ? '#6B7280' : '#6B7280' }]}
+        allowFontScaling={false}
+      >
+        {subtitle}
+      </Text>
+    </View>
+    <NavChevronIcon />
+  </Pressable>
+);
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
@@ -243,10 +376,11 @@ const CategoryRow = ({ item, isLast, isDark }: CategoryRowProps) => (
 
 const AnalyticsScreen = () => {
   const { isDark } = useTheme();
+  const navigation = useNavigation<any>();
 
   const handleSeeAll = useCallback(() => {
-    // navigation to full category breakdown
-  }, []);
+    navigation.navigate('SpendingBreakdown');
+  }, [navigation]);
 
   return (
     <ScreenWrapper edges={['top', 'left', 'right']}>
@@ -379,6 +513,21 @@ const AnalyticsScreen = () => {
               </View>
             ))}
           </View>
+        </View>
+
+        {/* ── Quick Access ──────────────────────────────────────────────────── */}
+        <View style={styles.navSection}>
+          {NAV_ITEMS.map(item => (
+            <NavItemRow
+              key={item.id}
+              icon={item.icon}
+              iconBg={item.iconBg}
+              title={item.title}
+              subtitle={item.subtitle}
+              onPress={() => navigation.navigate(item.route)}
+              isDark={isDark}
+            />
+          ))}
         </View>
 
         {/* ── Top Categories ────────────────────────────────────────────────── */}
@@ -671,5 +820,42 @@ const styles = StyleSheet.create({
   rowDivider: {
     height: 1,
     marginLeft: 64,
+  },
+  // Nav items
+  navSection: {
+    marginHorizontal: 24,
+    marginTop: 20,
+    gap: 10,
+  },
+  navItemCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 14,
+    borderRadius: 14,
+    borderWidth: 1,
+    height: 71,
+    paddingHorizontal: 16,
+  },
+  navItemIcon: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
+  },
+  navItemContent: {
+    flex: 1,
+    gap: 3,
+  },
+  navItemTitle: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 14,
+    lineHeight: 21,
+  },
+  navItemSubtitle: {
+    fontFamily: 'Inter24pt-Medium',
+    fontSize: 11,
+    lineHeight: 16.5,
   },
 });

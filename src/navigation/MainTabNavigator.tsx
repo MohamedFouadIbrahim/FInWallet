@@ -14,7 +14,7 @@ import Svg, { Path, Rect, Circle } from 'react-native-svg';
 
 import DashboardNavigator from '@features/dashboard/navigation/DashboardNavigator';
 import WalletNavigator from '@features/wallet/navigation/WalletNavigator';
-import AnalyticsScreen from '@features/analytics/screens/AnalyticsScreen';
+import AnalyticsNavigator from '@features/analytics/navigation/AnalyticsNavigator';
 import ProfileScreen from '@features/profile/screens/ProfileScreen';
 import QRScannerScreen from '@features/receive/screens/QRScannerScreen';
 
@@ -211,7 +211,7 @@ export default function MainTabNavigator() {
       <Tab.Screen name="Home" component={DashboardNavigator} />
       <Tab.Screen name="Wallet" component={WalletNavigator} />
       <Tab.Screen name="Scan" component={QRScannerScreen} />
-      <Tab.Screen name="Analytics" component={AnalyticsScreen} />
+      <Tab.Screen name="Analytics" component={AnalyticsNavigator} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
     </Tab.Navigator>
   );
