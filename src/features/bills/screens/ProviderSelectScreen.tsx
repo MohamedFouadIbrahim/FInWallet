@@ -234,7 +234,10 @@ export default function ProviderSelectScreen() {
       <View style={styles.bottomBar}>
         <Pressable
           style={[styles.continueButton, canContinue && styles.continueButtonActive]}
-          onPress={() => {}}
+          onPress={() => {
+            const provider = providers.find(p => p.id === selectedId)!;
+            navigation.navigate('BillPayment', { provider });
+          }}
           disabled={!canContinue}
           accessibilityLabel="Continue"
         >

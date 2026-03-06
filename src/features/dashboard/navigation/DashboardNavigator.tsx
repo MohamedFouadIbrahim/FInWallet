@@ -24,6 +24,10 @@ import CardPinScreen from '@features/cards/screens/CardPinScreen';
 import ViewPinScreen from '@features/cards/screens/ViewPinScreen';
 import PayBillsScreen from '@features/bills/screens/PayBillsScreen';
 import ProviderSelectScreen from '@features/bills/screens/ProviderSelectScreen';
+import BillPaymentScreen from '@features/bills/screens/BillPaymentScreen';
+import BillReviewScreen from '@features/bills/screens/BillReviewScreen';
+import BillProcessingScreen from '@features/bills/screens/BillProcessingScreen';
+import BillSuccessScreen from '@features/bills/screens/BillSuccessScreen';
 
 export type DashboardStackParamList = {
   HomeMain: undefined;
@@ -38,6 +42,55 @@ export type DashboardStackParamList = {
   ViewPin: undefined;
   PayBills: undefined;
   ProviderSelect: { categoryId: string; categoryName: string };
+  BillPayment: {
+    provider: {
+      id: string;
+      initials: string;
+      initialsColor: string;
+      avatarBg: string;
+      name: string;
+      subtitle: string;
+    };
+  };
+  BillReview: {
+    provider: {
+      id: string;
+      initials: string;
+      initialsColor: string;
+      avatarBg: string;
+      name: string;
+      subtitle: string;
+    };
+    accountNumber: string;
+    amount: string;
+    customerName: string;
+  };
+  BillProcessing: {
+    provider: {
+      id: string;
+      initials: string;
+      initialsColor: string;
+      avatarBg: string;
+      name: string;
+      subtitle: string;
+    };
+    accountNumber: string;
+    amount: string;
+    customerName: string;
+  };
+  BillSuccess: {
+    provider: {
+      id: string;
+      initials: string;
+      initialsColor: string;
+      avatarBg: string;
+      name: string;
+      subtitle: string;
+    };
+    accountNumber: string;
+    amount: string;
+    customerName: string;
+  };
   SendMoney: undefined;
   ReceiveMoney: undefined;
   SendToWallet: undefined;
@@ -127,6 +180,26 @@ export default function DashboardNavigator() {
         name="ProviderSelect"
         component={ProviderSelectScreen}
         options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="BillPayment"
+        component={BillPaymentScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="BillReview"
+        component={BillReviewScreen}
+        options={{ animation: 'slide_from_right' }}
+      />
+      <Stack.Screen
+        name="BillProcessing"
+        component={BillProcessingScreen}
+        options={{ animation: 'fade', gestureEnabled: false }}
+      />
+      <Stack.Screen
+        name="BillSuccess"
+        component={BillSuccessScreen}
+        options={{ animation: 'fade', gestureEnabled: false }}
       />
       <Stack.Screen
         name="SendMoney"

@@ -7,7 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import type { NativeStackScreenProps } from '@react-navigation/native-stack';
+import type { NativeStackNavigationProp, NativeStackScreenProps } from '@react-navigation/native-stack';
 import { OtpInput } from 'react-native-otp-entry';
 import type { OtpInputRef } from 'react-native-otp-entry';
 
@@ -17,6 +17,7 @@ import ArrowLeftIcon from '@components/ui/icons/ArrowLeftIcon';
 import FingerprintIcon from '@components/ui/icons/FingerprintIcon';
 import LockIcon from '@components/ui/icons/LockIcon';
 import type { AuthStackParamList } from '@features/auth/navigation/AuthNavigator';
+import { RootStackParamList } from '@/navigation/RootNavigator';
 
 type Props = NativeStackScreenProps<AuthStackParamList, 'EnterPin'>;
 
@@ -40,7 +41,8 @@ export default function EnterPinScreen({ navigation }: Props) {
     setTimeout(() => {
       if (validatePin(value)) {
         // TODO: Navigate to main app / dashboard
-        console.log('PIN correct — navigate to main app');
+        const rootNav = navigation.getParent<NativeStackNavigationProp<RootStackParamList>>();
+        rootNav?.navigate('Main');
       } else {
         failedRef.current += 1;
         if (failedRef.current >= MAX_ATTEMPTS) {
